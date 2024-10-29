@@ -3,6 +3,7 @@
 ## Desenvolvedores
 
 - Jeová Bezerra Leite;
+- Arthur Lopes Filgueira Sampaio;
 
 ## Demandas
 
