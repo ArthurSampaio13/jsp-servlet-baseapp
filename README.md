@@ -22,6 +22,7 @@
   3. Linkar máquina do cliente com serviço render
   4. Editar página sobre
   5. Atualizar readme com as demandas
+  6. Adicionar link do render
 
 - Marcos Pierre de Melo Monteiro
   1. Implementar script de teste do github actions com maven
