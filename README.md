@@ -2,4 +2,4 @@
 
 ## Desenolvedores
 
-- Seu nome completo aqui;
+- Jeová Bezerra Leite;
