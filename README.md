@@ -1,6 +1,6 @@
 # Escreva aqui o tema da equipe, por exemplo (App Universo, App Animais, App Comidas)
 
-## Link do projeto render
+## Link do projeto render:
 - https://jsp-servlet-baseapp-h3sw.onrender.com
 
 ## Desenvolvedores
