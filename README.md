@@ -7,6 +7,7 @@
 
 - Jeová Bezerra Leite;
 - Arthur Lopes Filgueira Sampaio;
+- Marcos Pierre de Melo Monteiro;
 
 ## Demandas
 
