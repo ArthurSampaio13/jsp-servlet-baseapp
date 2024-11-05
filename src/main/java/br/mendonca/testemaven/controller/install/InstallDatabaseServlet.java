@@ -37,7 +37,13 @@ public class InstallDatabaseServlet extends HttpServlet {
 
 			service.createEstrelaTable();
 			msg += "<h2>Create table estrela sucessful!</h2>\n";
-			
+
+			service.deletePlanetasTable();
+			msg += "<h2>Delete table planetas sucessful!</h2>\n";
+
+			service.createPlanetasTable();
+			msg += "<h2>Create table planetas sucessful!</h2>\n";
+
 			page.println("<html lang='pt-br'><head><title>Teste</title></head><body>");
 			page.println(msg);
 			/*/

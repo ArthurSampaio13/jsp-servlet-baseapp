@@ -38,6 +38,7 @@
 					<li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="/dashboard/planetas">Planetas</a></li>
 				</ul>
 				<span class="navbar-text">
 						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
@@ -68,7 +69,7 @@
 		</tr>
 		<tr>
 			<td scope="col">Arthur Lopes Filgueira Sampaio</th>
-			<td scope="col">Coloque aqui sua entidade de trabalho</th>
+			<td scope="col">Planetas</th>
 			<td scope="col">Coloque aqui sua regra de negócio</th>
 		</tr>
 		<tr>
