@@ -12,13 +12,13 @@ public class GalaxiaDAO {
         Connection conn = ConnectionPostgres.getConexao();
         conn.setAutoCommit(true);
 
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO galaxias (id, nome, quantidadeDeEstrelas, viaLactea) VALUES (?, ?, ?, ?)");
-        ps.setString(1, galaxia.getId().toString());
-        ps.setString(2, galaxia.getNome());
-        ps.setInt(3, galaxia.getQuantidadeDeEstrelas());
-        ps.setBoolean(4, galaxia.isViaLactea());
+        // Removido o parâmetro id, pois será gerado pelo banco
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES (?, ?, ?)");
+        ps.setString(1, galaxia.getNome());
+        ps.setInt(2, galaxia.getQuantidadeDeEstrelas());
+        ps.setBoolean(3, galaxia.isViaLactea());
 
-        ps.execute();
+        ps.executeUpdate(); // Altere para executeUpdate()
         ps.close();
     }
 
@@ -32,7 +32,7 @@ public class GalaxiaDAO {
         ResultSet rs = st.executeQuery("SELECT * FROM galaxias");
 
         while (rs.next()) {
-            UUID id = UUID.fromString(rs.getString("id"));
+            UUID id = (UUID) rs.getObject("id"); // Alterado para usar getObject
             String nome = rs.getString("nome");
             int quantidadeDeEstrelas = rs.getInt("quantidadeDeEstrelas");
             boolean viaLactea = rs.getBoolean("viaLactea");
@@ -57,7 +57,7 @@ public class GalaxiaDAO {
 
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            UUID id = UUID.fromString(rs.getString("id"));
+            UUID id = (UUID) rs.getObject("id"); // Alterado para usar getObject
             int quantidadeDeEstrelas = rs.getInt("quantidadeDeEstrelas");
             boolean viaLactea = rs.getBoolean("viaLactea");
 
@@ -80,7 +80,7 @@ public class GalaxiaDAO {
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            UUID id = UUID.fromString(rs.getString("id"));
+            UUID id = (UUID) rs.getObject("id"); // Alterado para usar getObject
             String nome = rs.getString("nome");
             int quantidadeDeEstrelas = rs.getInt("quantidadeDeEstrelas");
 
