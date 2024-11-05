@@ -2,27 +2,19 @@ package br.mendonca.testemaven.services.dto;
 
 import br.mendonca.testemaven.model.entities.Galaxia;
 
+import java.util.UUID;
+
 public class GalaxiaDTO {
-    private String id;
     private String nome;
     private int quantidadeDeEstrelas;
     private boolean viaLactea;
 
     public static GalaxiaDTO galaxiaMapper(Galaxia galaxia) {
         GalaxiaDTO dto = new GalaxiaDTO();
-        dto.id = galaxia.getId().toString();
         dto.nome = galaxia.getNome();
         dto.quantidadeDeEstrelas = galaxia.getQuantidadeDeEstrelas();
         dto.viaLactea = galaxia.isViaLactea();
         return dto;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNome() {
