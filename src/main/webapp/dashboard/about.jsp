@@ -74,7 +74,7 @@
 		</tr>
 		<tr>
 			<td scope="col">Marcos Pierre de Melo Monteiro</th>
-			<td scope="col">Coloque aqui sua entidade de trabalho</th>
+			<td scope="col">Galaxia</th>
 			<td scope="col">Coloque aqui sua regra de negócio</th>
 		</tr>
 		<tbody>
