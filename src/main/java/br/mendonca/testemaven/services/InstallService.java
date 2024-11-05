@@ -32,4 +32,18 @@ public class InstallService {
 					+ "    email VARCHAR(255) NOT NULL,"
 					+ "    password VARCHAR(255) NOT NULL)");
 	}
+
+	public void deleteEstrelaTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS estrelas");
+	}
+
+	public void createEstrelaTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE estrelas ("
+					+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+					+ "    nome VARCHAR(255) NOT NULL,"
+					+ "    temperatura INTEGER NOT NULL,"
+					+ "    esta_na_via_lactea BOOLEAN NOT NULL)");
+	}
+
+
 }
