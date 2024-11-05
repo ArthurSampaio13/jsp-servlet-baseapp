@@ -44,4 +44,16 @@ public class InstallService {
 				+ "    quantidadeDeEstrelas INTEGER NOT NULL,"
 				+ "    viaLactea BOOLEAN NOT NULL)");
 	}
+
+	public void deletePlanetasTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS planetas");
+	}
+
+	public void createPlanetasTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE planetas ("
+				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    nome VARCHAR(255) NOT NULL,"
+				+ "    densidade INT NOT NULL,"
+				+ "    possuiAgua BOOLEAN NOT NULL)");
+	}
 }

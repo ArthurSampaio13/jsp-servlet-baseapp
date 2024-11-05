@@ -18,12 +18,20 @@
   4. Atualizado as minhas demandas no README.md
 
 - Arthur Lopes Filgueira Sampaio
+  1º Semana
   1. Escolher o líder da equipe
   2. Instalar DB na máquina do cliente
   3. Linkar máquina do cliente com serviço render
   4. Editar página sobre
   5. Atualizar readme com as demandas
   6. Adicionar link do render
+
+  2º Semana 
+  1. O usuário consegue instalar novas tabelas no BD pelo endpoint 'install'
+  2. O usuário consegue inserir no sistema, de forma permanente, uma ou mais entidade com suas propriedadas, através do item de menu
+  3. O usuário consegue listar todas as entidades cadastradas através do um item de menu
+  4. Preencher about
+  5. Preencher readme
 
 - Marcos Pierre de Melo Monteiro
   1. Implementar script de teste do github actions com maven
