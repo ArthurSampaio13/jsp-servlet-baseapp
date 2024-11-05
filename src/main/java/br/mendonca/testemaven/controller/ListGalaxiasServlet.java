@@ -54,7 +54,7 @@ public class ListGalaxiasServlet extends HttpServlet {
 
         try {
             String nome = request.getParameter("nome");
-            int quantidadeDeEstrelas = Integer.parseInt(request.getParameter("quantidadeDeEstrelas"));
+            int quantidadeDeEstrelas = Integer.parseInt(request.getParameter("estrela"));
             boolean viaLactea = request.getParameter("viaLactea") != null;
 
             GalaxiaService service = new GalaxiaService();
