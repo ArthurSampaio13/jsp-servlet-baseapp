@@ -69,7 +69,7 @@
 		</tr>
 		<tr>
 			<td scope="col">Arthur Lopes Filgueira Sampaio</th>
-			<td scope="col">Coloque aqui sua entidade de trabalho</th>
+			<td scope="col">Planetas</th>
 			<td scope="col">Coloque aqui sua regra de negócio</th>
 		</tr>
 		<tr>
