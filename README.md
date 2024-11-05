@@ -18,7 +18,6 @@
   4. Atualizado as minhas demandas no README.md
 
 - Arthur Lopes Filgueira Sampaio
-  - 1º Semana
   1. Escolher o líder da equipe
   2. Instalar DB na máquina do cliente
   3. Linkar máquina do cliente com serviço render
