@@ -45,6 +45,18 @@ public class InstallService {
 				+ "    viaLactea BOOLEAN NOT NULL)");
 	}
 
+	public void deleteEstrelaTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS estrelas");
+	}
+
+	public void createEstrelaTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE estrelas ("
+					+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+					+ "    nome VARCHAR(255) NOT NULL,"
+					+ "    temperatura INTEGER NOT NULL,"
+					+ "    esta_na_via_lactea BOOLEAN NOT NULL)");
+	}
+
 	public void deletePlanetasTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS planetas");
 	}
