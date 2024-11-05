@@ -26,14 +26,14 @@
   5. Atualizar readme com as demandas
   6. Adicionar link do render
 
-  2º Semana 
+- Marcos Pierre de Melo Monteiro
+  1. Implementar script de teste do github actions com maven
+  2. Editar página sobre
+  3. Atualizar readme com as demandas
+
+  2º Semana
   1. O usuário consegue instalar novas tabelas no BD pelo endpoint 'install'
   2. O usuário consegue inserir no sistema, de forma permanente, uma ou mais entidade com suas propriedadas, através do item de menu
   3. O usuário consegue listar todas as entidades cadastradas através do um item de menu
   4. Preencher about
   5. Preencher readme
-
-- Marcos Pierre de Melo Monteiro
-  1. Implementar script de teste do github actions com maven
-  2. Editar página sobre
-  3. Atualizar readme com as demandas
