@@ -66,9 +66,6 @@ public class EstrelaServletController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter page = response.getWriter();
-
         try {
             // Recebe os parâmetros do formulário
             String nome = request.getParameter("nome");
@@ -78,12 +75,8 @@ public class EstrelaServletController extends HttpServlet {
             // Chama o serviço para inserir uma nova estrela
             estrelaService.insertEstrela(nome, temperatura, estaNaViaLactea);
 
-            // Confirma a inserção
-            page.println("<html lang='pt-br'><head><title>Sucesso</title></head><body>");
-            page.println("<h1>Estrela adicionada com sucesso!</h1>");
-            page.println("<a href='/estrela'>Voltar para a lista de estrelas</a>");
-            page.println("</body></html>");
-            page.close();
+            // Redireciona de volta para a página de estrelas após a inserção
+            response.sendRedirect(request.getContextPath() + "/dashboard/estrelas.jsp");
 
         } catch (Exception e) {
             // Exibe erros em uma página HTML
@@ -91,6 +84,8 @@ public class EstrelaServletController extends HttpServlet {
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
 
+            response.setContentType("text/html");
+            PrintWriter page = response.getWriter();
             page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
             page.println("<h1>Error</h1>");
             page.println("<code>" + sw.toString() + "</code>");
@@ -98,4 +93,5 @@ public class EstrelaServletController extends HttpServlet {
             page.close();
         }
     }
+
 }
