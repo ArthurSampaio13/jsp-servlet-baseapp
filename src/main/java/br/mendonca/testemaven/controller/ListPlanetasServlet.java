@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet("/dashboard/planetas")
 public class ListPlanetasServlet extends HttpServlet {
@@ -24,27 +25,51 @@ public class ListPlanetasServlet extends HttpServlet {
         PrintWriter page = response.getWriter();
 
         try {
-            int pageNumber = 1;
-            String pageParam = request.getParameter("page");
-            if (pageParam != null) {
-                pageNumber = Integer.parseInt(pageParam);
+            PlanetaService service = new PlanetaService();
+            String deleteId = request.getParameter("deleteId");
+            if (deleteId != null) {
+                service.deletarLogico(UUID.fromString(deleteId));
+                response.sendRedirect("/dashboard/planetas");
+                return;
             }
 
-            int pageSize = 3;
-            PlanetaService service = new PlanetaService();
+            String viewDeleted = request.getParameter("viewDeleted");
+            List<PlanetaDTO> lista;
 
-            // Obtém a lista de planetas ativos com paginação
-            List<PlanetaDTO> lista = service.listPlanetasWithPagination(pageNumber, pageSize);
+            if (viewDeleted != null) {
+                int pageNumber = 1;
+                String pageParam = request.getParameter("page");
+                if (pageParam != null) {
+                    pageNumber = Integer.parseInt(pageParam);
+                }
 
-            // Conta o total de planetas ativos para calcular o número total de páginas
-            int totalPlanetasAtivos = service.countPlanetas();
-            int totalPages = (int) Math.ceil((double) totalPlanetasAtivos / pageSize);
+                int pageSize = 3;
+                lista = service.listPlanetasInativosWithPagination(pageNumber, pageSize);
+                int totalPlanetasInativos = service.countPlanetasInativos();
+                int totalPages = (int) Math.ceil((double) totalPlanetasInativos / pageSize);
+                request.setAttribute("currentPage", pageNumber);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("lista", lista);
+                request.getRequestDispatcher("planetas_deletados.jsp").forward(request, response);
 
-            // Envia a lista e as informações de paginação para a JSP
-            request.setAttribute("lista", lista);
-            request.setAttribute("currentPage", pageNumber);
-            request.setAttribute("totalPages", totalPages);
-            request.getRequestDispatcher("list-planetas.jsp").forward(request, response);
+            } else {
+                int pageNumber = 1;
+                String pageParam = request.getParameter("page");
+                if (pageParam != null) {
+                    pageNumber = Integer.parseInt(pageParam);
+                }
+
+                int pageSize = 3;
+                lista = service.listPlanetasWithPagination(pageNumber, pageSize);
+
+                int totalPlanetasAtivos = service.countPlanetas();
+                int totalPages = (int) Math.ceil((double) totalPlanetasAtivos / pageSize);
+
+                request.setAttribute("currentPage", pageNumber);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("lista", lista);
+                request.getRequestDispatcher("list-planetas.jsp").forward(request, response);
+            }
 
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
@@ -58,7 +83,6 @@ public class ListPlanetasServlet extends HttpServlet {
             page.close();
         }
     }
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
@@ -74,23 +98,16 @@ public class ListPlanetasServlet extends HttpServlet {
 
             response.sendRedirect("/dashboard/planetas");
 
-
         } catch (Exception e) {
-            // Escreve as mensagens de Exception em uma p�gina de resposta.
-            // N�o apagar este bloco.
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
 
             page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
             page.println("<h1>Error</h1>");
-            page.println("<code>");
-            page.println(sw.toString());
-            page.println("</code>");
+            page.println("<code>" + sw.toString() + "</code>");
             page.println("</body></html>");
             page.close();
-        } finally {
-
         }
     }
 }
