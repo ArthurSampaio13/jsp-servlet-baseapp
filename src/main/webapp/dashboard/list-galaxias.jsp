@@ -10,23 +10,14 @@
     // Definir quantos registros por página
     int registrosPorPagina = 3;
 
-    // Obter o número da página atual
+    // Obter o número da página atual, se não houver, considerar a página 1
     String paginaParam = request.getParameter("pagina");
     int paginaAtual = (paginaParam != null && !paginaParam.isEmpty()) ? Integer.parseInt(paginaParam) : 1;
 
-    // Obter a lista completa de galáxias
-    List<GalaxiaDTO> galaxias = galaxiaService.listAllGalaxias();
-
-    // Calcular o total de páginas
-    int totalRegistros = galaxias.size();
+    // Obter a lista paginada de galáxias e o total de registros
+    List<GalaxiaDTO> galaxiasPagina = galaxiaService.listGalaxiasWithPagination(paginaAtual, registrosPorPagina);
+    int totalRegistros = galaxiaService.countGalaxias();
     int totalPaginas = (int) Math.ceil((double) totalRegistros / registrosPorPagina);
-
-    // Calcular os índices de início e fim para a página atual
-    int inicio = (paginaAtual - 1) * registrosPorPagina;
-    int fim = Math.min(inicio + registrosPorPagina, totalRegistros);
-
-    // Sublistar as galáxias para a página atual
-    List<GalaxiaDTO> galaxiasPagina = galaxias.subList(inicio, fim);
 %>
 
 <!doctype html>

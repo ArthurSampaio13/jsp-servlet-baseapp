@@ -92,4 +92,50 @@ public class GalaxiaDAO {
         rs.close();
         return lista;
     }
+    public List<Galaxia> listGalaxiasWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<Galaxia> lista = new ArrayList<>();
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        int offset = (pageNumber - 1) * pageSize;
+
+        // Alterada a consulta para refletir a tabela galaxias
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM galaxias LIMIT ? OFFSET ?");
+        ps.setInt(1, pageSize);
+        ps.setInt(2, offset);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Galaxia galaxia = new Galaxia();
+            galaxia.setId((UUID) rs.getObject("id"));
+            galaxia.setNome(rs.getString("nome"));
+            galaxia.setQuantidadeDeEstrelas(rs.getInt("quantidadeDeEstrelas"));
+            galaxia.setViaLactea(rs.getBoolean("viaLactea"));
+
+            lista.add(galaxia);
+        }
+
+        rs.close();
+        ps.close();
+
+        return lista;
+    }
+
+    public int countGalaxias() throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM galaxias");
+        rs.next();
+        int total = rs.getInt("total");
+
+        rs.close();
+        st.close();
+
+        return total;
+    }
 }
+
+
