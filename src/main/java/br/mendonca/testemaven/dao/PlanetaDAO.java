@@ -94,6 +94,7 @@ public class PlanetaDAO {
             planeta.setNome(rs.getString("nome"));
             planeta.setDensidade(rs.getInt("densidade"));
             planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
+            planeta.setAtivo(rs.getBoolean("ativo"));
 
             lista.add(planeta);
         }
@@ -118,4 +119,13 @@ public class PlanetaDAO {
 
         return total;
     }
+
+    public void deletarLogico(UUID planetaId) throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        PreparedStatement ps = conn.prepareStatement("UPDATE planetas SET ativo = false WHERE uuid = ?");
+        ps.setObject(1, planetaId);
+        ps.executeUpdate();
+        ps.close();
+    }
+
 }
