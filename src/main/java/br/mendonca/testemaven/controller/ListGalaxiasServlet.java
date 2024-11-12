@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet("/dashboard/galaxias")
 public class ListGalaxiasServlet extends HttpServlet {
@@ -53,19 +54,35 @@ public class ListGalaxiasServlet extends HttpServlet {
         PrintWriter page = response.getWriter();
 
         try {
+            GalaxiaService service = new GalaxiaService();
+            String galaxiaId = request.getParameter("galaxiaId");
+            String action = request.getParameter("action");
+
+            if (galaxiaId != null && !galaxiaId.isEmpty()) {
+                GalaxiaDTO galaxia = service.findGalaxiaById(UUID.fromString(galaxiaId));
+
+                if (galaxia != null) {
+                    if ("delete".equalsIgnoreCase(action)) {
+                        galaxia.setVisible(false);
+                    } else if ("restore".equalsIgnoreCase(action)) {
+                        galaxia.setVisible(true);
+                    }
+                    service.updateGalaxia(galaxia);
+                }
+
+                response.sendRedirect("/dashboard/galaxias");
+                return;
+            }
+
+            // Se `galaxiaId` não estiver presente, cria uma nova galáxia.
             String nome = request.getParameter("nome");
             int quantidadeDeEstrelas = Integer.parseInt(request.getParameter("estrela"));
             boolean viaLactea = request.getParameter("viaLactea") != null;
 
-            GalaxiaService service = new GalaxiaService();
             service.register(nome, quantidadeDeEstrelas, viaLactea);
-
             response.sendRedirect("/dashboard/galaxias");
 
-
         } catch (Exception e) {
-            // Escreve as mensagens de Exception em uma p�gina de resposta.
-            // N�o apagar este bloco.
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
@@ -77,8 +94,6 @@ public class ListGalaxiasServlet extends HttpServlet {
             page.println("</code>");
             page.println("</body></html>");
             page.close();
-        } finally {
-
         }
     }
 }
