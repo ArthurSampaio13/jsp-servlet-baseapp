@@ -79,9 +79,14 @@
           <div>
             <strong>Nome:</strong> <%= estrela.getNome() %> |
           </div>
-          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detalhesModal<%= estrela.getUuid() %>">
-            Ver Detalhes
-          </button>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detalhesModal<%= estrela.getUuid() %>">
+              Ver Detalhes
+            </button>
+            <button type="button" class="btn btn-danger" onclick="marcarComoInvisivel('<%= estrela.getUuid() %>')">
+              Deletar
+            </button>
+          </div>
         </li>
 
 
@@ -130,6 +135,22 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+  function marcarComoInvisivel(uuid) {
+    if (confirm("Deseja realmente excluir esta estrela da listagem?")) {
+      fetch('/estrela/marcarComoInvisivel?uuid=' + uuid, { method: 'POST' })
+              .then(response => {
+                if (response.ok) {
+                  alert("Estrela marcada para não visualização.");
+                  window.location.reload(true);
+                } else {
+                  alert("Erro ao excluir a estrela.");
+                }
+              });
+    }
+  }
+</script>
 </body>
 </html>
 
