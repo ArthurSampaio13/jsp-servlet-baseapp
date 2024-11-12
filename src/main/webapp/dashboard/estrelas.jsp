@@ -6,7 +6,15 @@
 <%
   if (session.getAttribute("user") != null) {
     EstrelaService estrelaService = new EstrelaService();
-    List<EstrelaDTO> estrelas = estrelaService.listAllEstrelas();
+    int pageSize = 3; // Número de estrelas por página
+    int pageNumber = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+    // Chama o serviço para contar o total de estrelas
+    int totalEstrelas = estrelaService.countEstrelas();
+    int totalPages = (int) Math.ceil((double) totalEstrelas / pageSize); // Total de páginas
+
+    // Lista de estrelas para a página atual
+    List<EstrelaDTO> estrelas = estrelaService.listAllEstrelasPaginada(pageNumber, pageSize);
 %>
 
 <!doctype html>
@@ -15,7 +23,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Criar Estrela</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
@@ -70,14 +78,13 @@
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div>
             <strong>Nome:</strong> <%= estrela.getNome() %> |
-            <strong>Temperatura:</strong> <%= estrela.getTemperatura() %> K |
-            <strong>Está na Via Láctea:</strong> <%= estrela.getEstaNaViaLactea() ? "Sim" : "Não" %>
           </div>
-          <!-- Botão para abrir o modal com detalhes -->
           <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detalhesModal<%= estrela.getUuid() %>">
             Ver Detalhes
           </button>
         </li>
+
+
 
         <!-- Modal para detalhes da estrela -->
         <div class="modal fade" id="detalhesModal<%= estrela.getUuid() %>" tabindex="-1" aria-labelledby="detalhesModalLabel" aria-hidden="true">
@@ -88,7 +95,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <p><strong>UUID:</strong> <%= estrela.getUuid() %></p>
                 <p><strong>Nome:</strong> <%= estrela.getNome() %></p>
                 <p><strong>Temperatura:</strong> <%= estrela.getTemperatura() %> K</p>
                 <p><strong>Está na Via Láctea:</strong> <%= estrela.getEstaNaViaLactea() ? "Sim" : "Não" %></p>
@@ -102,6 +108,22 @@
         </div>
         <% } %>
       </ul>
+
+      <!-- Navegação de Páginas -->
+      <div class="mt-4">
+        <nav>
+          <ul class="pagination">
+            <li class="page-item <%= (pageNumber == 1) ? "disabled" : "" %>">
+              <a class="page-link" href="?page=<%= pageNumber - 1 %>">Anterior</a>
+            </li>
+
+            <!-- Impede ir além da última página -->
+            <li class="page-item <%= (pageNumber == totalPages) ? "disabled" : "" %>">
+              <a class="page-link" href="?page=<%= pageNumber + 1 %>">Próxima</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 

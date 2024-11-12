@@ -33,4 +33,22 @@ public class PlanetaService {
 
         return resp;
     }
+
+    public List<PlanetaDTO> listPlanetasWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<PlanetaDTO> resp = new ArrayList<>();
+
+        PlanetaDAO dao = new PlanetaDAO();
+        List<Planeta> lista = dao.listPlanetasWithPagination(pageNumber, pageSize);
+
+        for (Planeta planeta : lista) {
+            resp.add(PlanetaDTO.planetaMapper(planeta));
+        }
+
+        return resp;
+    }
+
+    public int countPlanetas() throws ClassNotFoundException, SQLException {
+        PlanetaDAO dao = new PlanetaDAO();
+        return dao.countPlanetas();
+    }
 }

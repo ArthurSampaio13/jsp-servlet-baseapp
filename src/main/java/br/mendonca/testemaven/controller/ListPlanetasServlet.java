@@ -24,15 +24,29 @@ public class ListPlanetasServlet extends HttpServlet {
         PrintWriter page = response.getWriter();
 
         try {
-            PlanetaService service = new PlanetaService();
-            List<PlanetaDTO> lista = service.listAllPlanetas();
+            int pageNumber = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam != null) {
+                pageNumber = Integer.parseInt(pageParam);
+            }
 
-            // Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
+            int pageSize = 3;
+            PlanetaService service = new PlanetaService();
+
+            // Obtém a lista de planetas com paginação
+            List<PlanetaDTO> lista = service.listPlanetasWithPagination(pageNumber, pageSize);
+
+            // Conta o total de planetas para calcular o número total de páginas
+            int totalPlanetas = service.countPlanetas();
+            int totalPages = (int) Math.ceil((double) totalPlanetas / pageSize);
+
+            // Envia a lista e as informações de paginação para a JSP
             request.setAttribute("lista", lista);
+            request.setAttribute("currentPage", pageNumber);
+            request.setAttribute("totalPages", totalPages);
             request.getRequestDispatcher("list-planetas.jsp").forward(request, response);
+
         } catch (Exception e) {
-            // Escreve as mensagens de Exception em uma p�gina de resposta.
-            // N�o apagar este bloco.
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
@@ -42,8 +56,6 @@ public class ListPlanetasServlet extends HttpServlet {
             page.println("<code>" + sw.toString() + "</code>");
             page.println("</body></html>");
             page.close();
-        } finally {
-
         }
     }
 

@@ -74,4 +74,48 @@ public class PlanetaDAO {
 
         return lista;
     }
+
+    public List<Planeta> listPlanetasWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<Planeta> lista = new ArrayList<>();
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        int offset = (pageNumber - 1) * pageSize;
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas LIMIT ? OFFSET ?");
+        ps.setInt(1, pageSize);
+        ps.setInt(2, offset);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Planeta planeta = new Planeta();
+            planeta.setUuid(UUID.fromString(rs.getString("uuid")));
+            planeta.setNome(rs.getString("nome"));
+            planeta.setDensidade(rs.getInt("densidade"));
+            planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
+
+            lista.add(planeta);
+        }
+
+        rs.close();
+        ps.close();
+
+        return lista;
+    }
+
+    public int countPlanetas() throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas");
+        rs.next();
+        int total = rs.getInt("total");
+
+        rs.close();
+        st.close();
+
+        return total;
+    }
 }

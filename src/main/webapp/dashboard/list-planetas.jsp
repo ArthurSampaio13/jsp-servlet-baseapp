@@ -74,13 +74,38 @@
       for (PlanetaDTO planeta : lista) {
     %>
     <tr>
-      <td><a href="#" class="planet-link" data-nome="<%= planeta.getNome() %>" data-densidade="<%= planeta.getDensidade() %>" data-agua="<%= planeta.isPossuiAgua() %>"><%= planeta.getNome() %></a></td>
+      <td><%= planeta.getNome() %></td>
       <td><%= planeta.getDensidade() %></td>
       <td><%= planeta.isPossuiAgua() ? "Sim" : "Não" %></td>
     </tr>
     <% } %>
     </tbody>
   </table>
+
+  <!-- Paginação -->
+  <div class="d-flex justify-content-between align-items-center">
+    <%
+      int currentPage = (int) request.getAttribute("currentPage");
+      int totalPages = (int) request.getAttribute("totalPages");
+      int previousPage = currentPage > 1 ? currentPage - 1 : 1;
+      int nextPage = currentPage < totalPages ? currentPage + 1 : totalPages;
+    %>
+
+    <!-- Botão Anterior -->
+    <a href="?page=<%= previousPage %>"
+       class="btn btn-primary <%= currentPage == 1 ? "disabled" : "" %>">
+      Anterior
+    </a>
+
+    <!-- Número da Página -->
+    <span>Página <%= currentPage %> de <%= totalPages %></span>
+
+    <!-- Botão Próxima -->
+    <a href="?page=<%= nextPage %>"
+       class="btn btn-primary <%= currentPage == totalPages ? "disabled" : "" %>">
+      Próxima
+    </a>
+  </div>
 
   <!-- Modal para exibir informações do planeta -->
   <div class="modal fade" id="planetModal" tabindex="-1" aria-labelledby="planetModalLabel" aria-hidden="true">

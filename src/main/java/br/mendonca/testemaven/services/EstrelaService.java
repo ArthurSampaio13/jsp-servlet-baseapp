@@ -21,6 +21,7 @@ public class EstrelaService {
     }
 
     public List<EstrelaDTO> listAllEstrelas() throws ClassNotFoundException, SQLException {
+
         EstrelaDAO dao = new EstrelaDAO();
 
         List<EstrelaDTO> resp = new ArrayList<>();
@@ -31,4 +32,20 @@ public class EstrelaService {
         }
         return resp;
     }
+
+    public int countEstrelas() throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        return dao.countEstrelas();
+    }
+
+    public List<EstrelaDTO> listAllEstrelasPaginada(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        List<EstrelaDTO> resp = new ArrayList<>();
+        List<Estrela> lista = dao.listAllEstrelasWithPagination(pageNumber, pageSize);
+        for (Estrela estrela : lista) {
+            resp.add(EstrelaDTO.estrelaMapper(estrela));
+        }
+        return resp;
+    }
+
 }
