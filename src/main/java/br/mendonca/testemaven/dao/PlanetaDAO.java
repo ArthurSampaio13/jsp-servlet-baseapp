@@ -82,7 +82,7 @@ public class PlanetaDAO {
 
         int offset = (pageNumber - 1) * pageSize;
 
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas LIMIT ? OFFSET ?");
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas WHERE ativo = true LIMIT ? OFFSET ?");
         ps.setInt(1, pageSize);
         ps.setInt(2, offset);
 
@@ -109,7 +109,7 @@ public class PlanetaDAO {
         conn.setAutoCommit(true);
 
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas");
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas WHERE ativo = true");
         rs.next();
         int total = rs.getInt("total");
 
