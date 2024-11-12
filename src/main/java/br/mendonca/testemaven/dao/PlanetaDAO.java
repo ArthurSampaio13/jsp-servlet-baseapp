@@ -128,4 +128,34 @@ public class PlanetaDAO {
         ps.close();
     }
 
+    public List<Planeta> listPlanetasInativosWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<Planeta> lista = new ArrayList<>();
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        int offset = (pageNumber - 1) * pageSize;
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas WHERE ativo = false LIMIT ? OFFSET ?");
+        ps.setInt(1, pageSize);
+        ps.setInt(2, offset);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Planeta planeta = new Planeta();
+            planeta.setUuid(UUID.fromString(rs.getString("uuid")));
+            planeta.setNome(rs.getString("nome"));
+            planeta.setDensidade(rs.getInt("densidade"));
+            planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
+            planeta.setAtivo(rs.getBoolean("ativo"));
+
+            lista.add(planeta);
+        }
+
+        rs.close();
+        ps.close();
+
+        return lista;
+    }
+
 }
