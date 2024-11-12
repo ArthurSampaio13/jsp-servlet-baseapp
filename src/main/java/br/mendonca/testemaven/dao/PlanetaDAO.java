@@ -82,7 +82,7 @@ public class PlanetaDAO {
 
         int offset = (pageNumber - 1) * pageSize;
 
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas LIMIT ? OFFSET ?");
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas WHERE ativo = true LIMIT ? OFFSET ?");
         ps.setInt(1, pageSize);
         ps.setInt(2, offset);
 
@@ -94,6 +94,7 @@ public class PlanetaDAO {
             planeta.setNome(rs.getString("nome"));
             planeta.setDensidade(rs.getInt("densidade"));
             planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
+            planeta.setAtivo(rs.getBoolean("ativo"));
 
             lista.add(planeta);
         }
@@ -109,7 +110,7 @@ public class PlanetaDAO {
         conn.setAutoCommit(true);
 
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas");
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas WHERE ativo = true");
         rs.next();
         int total = rs.getInt("total");
 
@@ -118,4 +119,58 @@ public class PlanetaDAO {
 
         return total;
     }
+
+    public void deletarLogico(UUID planetaId) throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        PreparedStatement ps = conn.prepareStatement("UPDATE planetas SET ativo = false WHERE uuid = ?");
+        ps.setObject(1, planetaId);
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    public List<Planeta> listPlanetasInativosWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<Planeta> lista = new ArrayList<>();
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        int offset = (pageNumber - 1) * pageSize;
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM planetas WHERE ativo = false LIMIT ? OFFSET ?");
+        ps.setInt(1, pageSize);
+        ps.setInt(2, offset);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Planeta planeta = new Planeta();
+            planeta.setUuid(UUID.fromString(rs.getString("uuid")));
+            planeta.setNome(rs.getString("nome"));
+            planeta.setDensidade(rs.getInt("densidade"));
+            planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
+            planeta.setAtivo(rs.getBoolean("ativo"));
+
+            lista.add(planeta);
+        }
+
+        rs.close();
+        ps.close();
+
+        return lista;
+    }
+
+    public int countPlanetasInativos() throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas WHERE ativo = false");
+        rs.next();
+        int total = rs.getInt("total");
+
+        rs.close();
+        st.close();
+
+        return total;
+    }
+
 }

@@ -7,6 +7,7 @@ import br.mendonca.testemaven.services.dto.EstrelaDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class EstrelaService {
 
@@ -47,5 +48,27 @@ public class EstrelaService {
         }
         return resp;
     }
+
+    public void desativarEstrela(String uuid) throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        dao.desativarEstrela(uuid);
+    }
+
+    public List<EstrelaDTO> listAllEstrelasDesativadasPaginada(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        List<EstrelaDTO> resp = new ArrayList<>();
+        List<Estrela> lista = dao.listAllEstrelasDesativadasWithPagination(pageNumber, pageSize);
+        for (Estrela estrela : lista) {
+            resp.add(EstrelaDTO.estrelaMapper(estrela));
+        }
+        return resp;
+    }
+
+    public int countEstrelasDesativadas() throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        return dao.countEstrelasDesativadas();
+    }
+
+
 
 }

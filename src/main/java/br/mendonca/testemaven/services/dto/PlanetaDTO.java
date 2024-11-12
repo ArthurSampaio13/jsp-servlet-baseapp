@@ -2,10 +2,30 @@ package br.mendonca.testemaven.services.dto;
 
 import br.mendonca.testemaven.model.entities.Planeta;
 
+import java.util.UUID;
+
 public class PlanetaDTO {
+    private UUID uuid;
     private String nome;
     private int densidade;
     private boolean possuiAgua;
+    private boolean ativo = true;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 
     public String getNome() {
         return nome;
@@ -33,9 +53,11 @@ public class PlanetaDTO {
 
     public static PlanetaDTO planetaMapper(Planeta planeta) {
         PlanetaDTO planetaDTO = new PlanetaDTO();
+        planetaDTO.setUuid(planeta.getUuid());
         planetaDTO.setNome(planeta.getNome());
         planetaDTO.setDensidade(planeta.getDensidade());
         planetaDTO.setPossuiAgua(planeta.isPossuiAgua());
+        planetaDTO.setAtivo(planeta.isAtivo());
 
         return planetaDTO;
     }

@@ -31,8 +31,9 @@
           <li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/estrelasDeletadas.jsp">Estrelas deletadas</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/planetas">Planetas</a></li>
-          <li class="nav-item"><a class="nav-link" href="/dashboard/galaxias">Galaxia</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/list-galaxias.jsp">Galaxias</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
         </ul>
         <span class="navbar-text">
@@ -59,13 +60,14 @@
     </div>
     <button type="submit" class="btn btn-primary mt-3">Adicionar Planeta</button>
   </form>
-
+  <p></p>
+  <a href="/dashboard/planetas?viewDeleted=true" class="btn btn-secondary">Ver Planetas Deletados</a>
+  <p></p>
   <table class="table">
     <thead>
     <tr>
       <th scope="col">Nome</th>
-      <th scope="col">Densidade</th>
-      <th scope="col">Possui Agua</th>
+      <th scope="col">Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -74,40 +76,45 @@
       for (PlanetaDTO planeta : lista) {
     %>
     <tr>
-      <td><%= planeta.getNome() %></td>
-      <td><%= planeta.getDensidade() %></td>
-      <td><%= planeta.isPossuiAgua() ? "Sim" : "Não" %></td>
+      <td>
+        <a href="#" class="planet-link"
+           data-nome="<%= planeta.getNome() %>"
+           data-densidade="<%= planeta.getDensidade() %>"
+           data-agua="<%= planeta.isPossuiAgua() %>">
+          <%= planeta.getNome() %>
+        </a>
+      </td>
+      <td>
+        <a href="/dashboard/planetas?deleteId=<%= planeta.getUuid() %>" class="btn btn-danger">Deletar</a>
+      </td>
     </tr>
     <% } %>
     </tbody>
   </table>
 
-  <!-- Paginação -->
-  <div class="d-flex justify-content-between align-items-center">
-    <%
-      int currentPage = (int) request.getAttribute("currentPage");
-      int totalPages = (int) request.getAttribute("totalPages");
-      int previousPage = currentPage > 1 ? currentPage - 1 : 1;
-      int nextPage = currentPage < totalPages ? currentPage + 1 : totalPages;
-    %>
+  <div class="d-flex justify-content-between align-items-center"><%
+    Integer currentPage = (Integer) request.getAttribute("currentPage");
+    Integer totalPages = (Integer) request.getAttribute("totalPages");
 
-    <!-- Botão Anterior -->
+    int previousPage = (currentPage != null && currentPage > 1) ? currentPage - 1 : 1;
+    int nextPage = (currentPage != null && currentPage < totalPages) ? currentPage + 1 : 1;
+  %>
+
+    <% if (currentPage != null && totalPages != null) { %>
     <a href="?page=<%= previousPage %>"
        class="btn btn-primary <%= currentPage == 1 ? "disabled" : "" %>">
       Anterior
     </a>
 
-    <!-- Número da Página -->
     <span>Página <%= currentPage %> de <%= totalPages %></span>
 
-    <!-- Botão Próxima -->
     <a href="?page=<%= nextPage %>"
        class="btn btn-primary <%= currentPage == totalPages ? "disabled" : "" %>">
       Próxima
     </a>
+    <% } %>
   </div>
 
-  <!-- Modal para exibir informações do planeta -->
   <div class="modal fade" id="planetModal" tabindex="-1" aria-labelledby="planetModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -136,7 +143,7 @@
 
     planetLinks.forEach(link => {
       link.addEventListener("click", function(event) {
-        event.preventDefault()
+        event.preventDefault();
 
         document.getElementById("modalNome").textContent = this.dataset.nome;
         document.getElementById("modalDensidade").textContent = this.dataset.densidade;

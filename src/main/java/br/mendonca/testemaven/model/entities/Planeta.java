@@ -7,6 +7,15 @@ public class Planeta {
     private String nome;
     private int densidade;
     private boolean possuiAgua;
+    private boolean ativo = true;
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 
     public UUID getUuid() {
         return uuid;
