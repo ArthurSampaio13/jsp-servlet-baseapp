@@ -60,6 +60,7 @@ public class EstrelaDAO {
 			estrela.setNome(rs.getString("nome"));
 			estrela.setTemperatura(rs.getInt("temperatura"));
 			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
+			estrela.setEstaAtivo(rs.getBoolean("estaAtivo"));
 		}
 
 		rs.close();
@@ -74,7 +75,7 @@ public class EstrelaDAO {
 
 		int offset = (pageNumber - 1) * pageSize;
 
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM estrelas LIMIT ? OFFSET ?");
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM estrelas WHERE estaAtivo = true LIMIT ? OFFSET ?");
 		ps.setInt(1, pageSize);
 		ps.setInt(2, offset);
 
@@ -86,6 +87,7 @@ public class EstrelaDAO {
 			estrela.setNome(rs.getString("nome"));
 			estrela.setTemperatura(rs.getInt("temperatura"));
 			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
+			estrela.setEstaAtivo(rs.getBoolean("estaAtivo"));
 			lista.add(estrela);
 		}
 
@@ -99,11 +101,21 @@ public class EstrelaDAO {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM estrelas");
+		ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM estrelas WHERE estaAtivo = true");
 		rs.next();
 		int total = rs.getInt("total");
 		rs.close();
 		st.close();
 		return total;
+	}
+
+	public void desativarEstrela(String uuid) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("UPDATE estrelas SET estaAtivo = false WHERE uuid = ?");
+		ps.setObject(1, UUID.fromString(uuid));
+		ps.execute();
+		ps.close();
 	}
 }

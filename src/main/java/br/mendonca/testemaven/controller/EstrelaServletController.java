@@ -1,12 +1,15 @@
 package br.mendonca.testemaven.controller;
 
+import br.mendonca.testemaven.dao.EstrelaDAO;
 import br.mendonca.testemaven.services.EstrelaService;
 import br.mendonca.testemaven.services.dto.EstrelaDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -93,5 +96,4 @@ public class EstrelaServletController extends HttpServlet {
             page.close();
         }
     }
-
 }

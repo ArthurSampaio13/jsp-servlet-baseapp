@@ -7,6 +7,7 @@ import br.mendonca.testemaven.services.dto.EstrelaDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class EstrelaService {
 
@@ -46,6 +47,11 @@ public class EstrelaService {
             resp.add(EstrelaDTO.estrelaMapper(estrela));
         }
         return resp;
+    }
+
+    public void desativarEstrela(String uuid) throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        dao.desativarEstrela(uuid);
     }
 
 }

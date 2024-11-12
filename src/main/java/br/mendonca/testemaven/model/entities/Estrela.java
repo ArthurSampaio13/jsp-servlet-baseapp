@@ -5,6 +5,7 @@ public class Estrela {
     private String nome;
     private Integer temperatura;
     private Boolean estaNaViaLactea;
+    private Boolean estaAtivo;
 
     public String getUuid() {
         return uuid;
@@ -29,6 +30,12 @@ public class Estrela {
     }
     public void setEstaNaViaLactea(Boolean estaNaViaLactea) {
         this.estaNaViaLactea = estaNaViaLactea;
+    }
+    public Boolean getEstaAtivo() {
+        return estaAtivo;
+    }
+    public void setEstaAtivo(Boolean estaAtivo) {
+        this.estaAtivo = estaAtivo;
     }
 }
 
