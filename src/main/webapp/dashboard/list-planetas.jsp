@@ -64,8 +64,6 @@
     <thead>
     <tr>
       <th scope="col">Nome</th>
-      <th scope="col">Densidade</th>
-      <th scope="col">Possui Agua</th>
     </tr>
     </thead>
     <tbody>
@@ -74,9 +72,15 @@
       for (PlanetaDTO planeta : lista) {
     %>
     <tr>
-      <td><%= planeta.getNome() %></td>
-      <td><%= planeta.getDensidade() %></td>
-      <td><%= planeta.isPossuiAgua() ? "Sim" : "Não" %></td>
+      <!-- Link para exibir informações do planeta no modal -->
+      <td>
+        <a href="#" class="planet-link"
+           data-nome="<%= planeta.getNome() %>"
+           data-densidade="<%= planeta.getDensidade() %>"
+           data-agua="<%= planeta.isPossuiAgua() %>">
+          <%= planeta.getNome() %>
+        </a>
+      </td>
     </tr>
     <% } %>
     </tbody>
@@ -136,12 +140,14 @@
 
     planetLinks.forEach(link => {
       link.addEventListener("click", function(event) {
-        event.preventDefault()
+        event.preventDefault();
 
+        // Pega os dados do planeta a partir dos atributos data-*
         document.getElementById("modalNome").textContent = this.dataset.nome;
         document.getElementById("modalDensidade").textContent = this.dataset.densidade;
         document.getElementById("modalAgua").textContent = this.dataset.agua === "true" ? "Sim" : "Não";
 
+        // Exibe o modal
         new bootstrap.Modal(document.getElementById("planetModal")).show();
       });
     });
