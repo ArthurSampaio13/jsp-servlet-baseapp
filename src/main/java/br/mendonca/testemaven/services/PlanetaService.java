@@ -70,4 +70,9 @@ public class PlanetaService {
         return resp;
     }
 
+    public int countPlanetasInativos() throws ClassNotFoundException, SQLException {
+        PlanetaDAO dao = new PlanetaDAO();
+        return dao.countPlanetasInativos();
+    }
+
 }
