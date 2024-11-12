@@ -59,6 +59,9 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.createGalaxiaTable();
 			msg += "<h2>Create table galaxias successful!</h2>\n";
 
+			service.populate7GalaxiaTable();
+			msg += "<h2>7 Galaxias de exemplo adicionados com sucesso!</h2>\n";
+
 				page.println("<html lang='pt-br'><head><title>Install Database</title></head><body>");
 				page.println(msg);
 				/*/

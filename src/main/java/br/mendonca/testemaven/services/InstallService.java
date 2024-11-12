@@ -45,6 +45,16 @@ public class InstallService {
 				+ "    viaLactea BOOLEAN NOT NULL)");
 	}
 
+	public void populate7GalaxiaTable() throws ClassNotFoundException, SQLException {
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Via Láctea', 250000000, true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Andrômeda', 10000000, false)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Sombrero', 80000000, false)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Triângulo', 4000000, false)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Girassol', 3000000, false)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Olho Negro', 2000000, false)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Bode', 100000, false)");
+	}
+
 	public void deleteEstrelaTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS estrelas");
 	}
