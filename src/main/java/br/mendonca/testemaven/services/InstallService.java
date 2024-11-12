@@ -57,6 +57,16 @@ public class InstallService {
 					+ "    esta_na_via_lactea BOOLEAN NOT NULL)");
 	}
 
+	public void populate7EstrelaTable() throws ClassNotFoundException, SQLException {
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Sol', 5778, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Alpha Centauri', 5790, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Sirius', 9940, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Vega', 9602, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Betelgeuse', 3600, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Rigel', 12100, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Proxima Centauri', 3042, true)");
+	}
+
 	public void deletePlanetasTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS planetas");
 	}
