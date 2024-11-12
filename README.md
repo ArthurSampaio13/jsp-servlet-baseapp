@@ -62,6 +62,8 @@
 
 - Jeová Bezerra Leite
   1. O usuário consegue instalar as novas tabelas do banco com 7 individuos pelo endponit 'install'.
+  2. O usuário consegue visualizar todos os individuos listados com paginação de 3 individuos por página.
+  3. 
 
 
 - Marcos Pierre de Melo Monteiro
