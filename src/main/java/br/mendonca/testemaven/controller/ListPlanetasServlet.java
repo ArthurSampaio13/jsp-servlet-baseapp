@@ -33,12 +33,12 @@ public class ListPlanetasServlet extends HttpServlet {
             int pageSize = 3;
             PlanetaService service = new PlanetaService();
 
-            // Obtém a lista de planetas com paginação
+            // Obtém a lista de planetas ativos com paginação
             List<PlanetaDTO> lista = service.listPlanetasWithPagination(pageNumber, pageSize);
 
-            // Conta o total de planetas para calcular o número total de páginas
-            int totalPlanetas = service.countPlanetas();
-            int totalPages = (int) Math.ceil((double) totalPlanetas / pageSize);
+            // Conta o total de planetas ativos para calcular o número total de páginas
+            int totalPlanetasAtivos = service.countPlanetas();
+            int totalPages = (int) Math.ceil((double) totalPlanetasAtivos / pageSize);
 
             // Envia a lista e as informações de paginação para a JSP
             request.setAttribute("lista", lista);
