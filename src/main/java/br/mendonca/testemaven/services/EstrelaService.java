@@ -54,4 +54,21 @@ public class EstrelaService {
         dao.desativarEstrela(uuid);
     }
 
+    public List<EstrelaDTO> listAllEstrelasDesativadasPaginada(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        List<EstrelaDTO> resp = new ArrayList<>();
+        List<Estrela> lista = dao.listAllEstrelasDesativadasWithPagination(pageNumber, pageSize);
+        for (Estrela estrela : lista) {
+            resp.add(EstrelaDTO.estrelaMapper(estrela));
+        }
+        return resp;
+    }
+
+    public int countEstrelasDesativadas() throws ClassNotFoundException, SQLException {
+        EstrelaDAO dao = new EstrelaDAO();
+        return dao.countEstrelasDesativadas();
+    }
+
+
+
 }
