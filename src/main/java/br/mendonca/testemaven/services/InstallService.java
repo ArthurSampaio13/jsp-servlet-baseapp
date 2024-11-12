@@ -78,4 +78,14 @@ public class InstallService {
 				+ "    densidade INT NOT NULL,"
 				+ "    possuiAgua BOOLEAN NOT NULL)");
 	}
+
+	public void populate7PlanetaTable() throws ClassNotFoundException, SQLException {
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Terra', 5514, true)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Marte', 3933, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Júpiter', 1326, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Saturno', 687, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Vênus', 5243, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Netuno', 1638, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Mercúrio', 5427, false)");
+	}
 }
