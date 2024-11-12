@@ -32,9 +32,10 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
-          <li class="nav-item"><a class="nav-link" href="/dashboard/estrelas">Estrelas</a></li>
-          <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/planetas">Planetas</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/list-galaxias.jsp">Galaxias</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
         </ul>
         <span class="navbar-text">
           <a class="btn btn-success" href="/auth/logoff">Logoff</a>

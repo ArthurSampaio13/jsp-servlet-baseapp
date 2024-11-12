@@ -30,23 +30,4 @@ public class GalaxiaService {
         return resp;
     }
 
-    // Método para listar galáxias com paginação
-    public List<GalaxiaDTO> listGalaxiasPaginated(int page, int pageSize) throws ClassNotFoundException, SQLException {
-        ArrayList<GalaxiaDTO> resp = new ArrayList<>();
-
-        GalaxiaDAO dao = new GalaxiaDAO();
-        List<Galaxia> lista = dao.listGalaxiasPaginated(page, pageSize); // Método para pegar galáxias paginadas
-
-        for (Galaxia galaxia : lista) {
-            resp.add(GalaxiaDTO.galaxiaMapper(galaxia));
-        }
-
-        return resp;
-    }
-
-    // Método para contar o número total de galáxias
-    public int getTotalGalaxias() throws ClassNotFoundException, SQLException {
-        GalaxiaDAO dao = new GalaxiaDAO();
-        return dao.getTotalGalaxias(); // Método que retorna o total de galáxias
-    }
 }

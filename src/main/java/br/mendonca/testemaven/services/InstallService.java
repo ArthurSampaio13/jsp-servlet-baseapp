@@ -57,6 +57,16 @@ public class InstallService {
 					+ "    esta_na_via_lactea BOOLEAN NOT NULL)");
 	}
 
+	public void populate7EstrelaTable() throws ClassNotFoundException, SQLException {
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Sol', 5778, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Alpha Centauri', 5790, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Sirius', 9940, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Vega', 9602, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Betelgeuse', 3600, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Rigel', 12100, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Proxima Centauri', 3042, true)");
+	}
+
 	public void deletePlanetasTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS planetas");
 	}
@@ -67,5 +77,15 @@ public class InstallService {
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    densidade INT NOT NULL,"
 				+ "    possuiAgua BOOLEAN NOT NULL)");
+	}
+
+	public void populate7PlanetaTable() throws ClassNotFoundException, SQLException {
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Terra', 5514, true)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Marte', 3933, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Júpiter', 1326, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Saturno', 687, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Vênus', 5243, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Netuno', 1638, false)");
+		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Mercúrio', 5427, false)");
 	}
 }
