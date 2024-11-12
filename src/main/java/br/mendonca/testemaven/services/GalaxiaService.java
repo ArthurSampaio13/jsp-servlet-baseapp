@@ -52,10 +52,25 @@ public class GalaxiaService {
         return dao.countGalaxias();
     }
 
-    public void markGalaxiaAsInvisible(UUID galaxiaId) throws ClassNotFoundException, SQLException {
+    public int countInvisibleGalaxias() throws ClassNotFoundException, SQLException {
         GalaxiaDAO dao = new GalaxiaDAO();
-        dao.markAsInvisible(galaxiaId);
+        return dao.countInvisibleGalaxias();
     }
+
+    public List<GalaxiaDTO> listInvisibleGalaxiasWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<GalaxiaDTO> resp = new ArrayList<>();
+
+        GalaxiaDAO dao = new GalaxiaDAO();
+        List<Galaxia> lista = dao.listInvisibleGalaxiasWithPagination(pageNumber, pageSize);
+
+        // Mapeia cada galáxia para um GalaxiaDTO
+        for (Galaxia galaxia : lista) {
+            resp.add(GalaxiaDTO.galaxiaMapper(galaxia));
+        }
+
+        return resp;
+    }
+
 
     public GalaxiaDTO findGalaxiaById(UUID galaxiaId) throws ClassNotFoundException, SQLException {
         GalaxiaDAO dao = new GalaxiaDAO();

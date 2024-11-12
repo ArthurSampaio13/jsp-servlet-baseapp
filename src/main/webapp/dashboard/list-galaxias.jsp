@@ -45,6 +45,7 @@
           <li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/planetas">Planetas</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/list-galaxias.jsp">Galáxias</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/galaxiasDeletadas.jsp">Galáxias Deletadas</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
         </ul>
         <span class="navbar-text">
@@ -82,8 +83,6 @@
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div>
           <strong>Nome:</strong> <%= galaxia.getNome() %> |
-          <strong>Quantidade de estrelas:</strong> <%= galaxia.getQuantidadeDeEstrelas() %> |
-          <strong>É a Via Láctea?:</strong> <%= galaxia.isViaLactea() ? "Sim" : "Não" %>
         </div>
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detalhesModal<%= galaxia.getId() %>">
           Ver Detalhes
