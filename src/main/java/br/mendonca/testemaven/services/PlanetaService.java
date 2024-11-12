@@ -58,4 +58,16 @@ public class PlanetaService {
         dao.deletarLogico(planetaId);
     }
 
+    public List<PlanetaDTO> listPlanetasInativosWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+        ArrayList<PlanetaDTO> resp = new ArrayList<>();
+        PlanetaDAO dao = new PlanetaDAO();
+        List<Planeta> lista = dao.listPlanetasInativosWithPagination(pageNumber, pageSize);
+
+        for (Planeta planeta : lista) {
+            resp.add(PlanetaDTO.planetaMapper(planeta));
+        }
+
+        return resp;
+    }
+
 }
