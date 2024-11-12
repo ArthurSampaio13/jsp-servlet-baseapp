@@ -50,5 +50,6 @@
   1. O usuário consegue instalar novas tabelas no BD pelo endpoint 'install'
   2. O usuário consegue inserir no sistema, de forma permanente, uma ou mais entidade com suas propriedadas, através do item de menu
   3. O usuário consegue listar todas as entidades cadastradas através do um item de menu
-  4. Preencher about
-  5. Preencher readme
+  4. O usuário consegue visualizar uma estrela específica através do item de menu
+  5. Preencher about
+  6. Preencher readme
