@@ -54,3 +54,14 @@
   4. O usuário consegue visualizar uma estrela específica através do item de menu
   5. Preencher about
   6. Preencher readme
+
+
+## 3° Demanda
+- Arthur Lopes Filgueira Sampaio
+
+
+- Jeová Bezerra Leite
+  1. O usuário consegue instalar as novas tabelas do banco com 7 individuos pelo endponit 'install'.
+
+
+- Marcos Pierre de Melo Monteiro
