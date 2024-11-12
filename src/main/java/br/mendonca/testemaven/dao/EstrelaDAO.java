@@ -67,4 +67,43 @@ public class EstrelaDAO {
 		return estrela;
 	}
 
+	public List<Estrela> listAllEstrelasWithPagination(int pageNumber, int pageSize) throws ClassNotFoundException, SQLException {
+		ArrayList<Estrela> lista = new ArrayList<>();
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		int offset = (pageNumber - 1) * pageSize;
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM estrelas LIMIT ? OFFSET ?");
+		ps.setInt(1, pageSize);
+		ps.setInt(2, offset);
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			Estrela estrela = new Estrela();
+			estrela.setUuid(rs.getString("uuid"));
+			estrela.setNome(rs.getString("nome"));
+			estrela.setTemperatura(rs.getInt("temperatura"));
+			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
+			lista.add(estrela);
+		}
+
+		rs.close();
+		ps.close();
+
+		return lista;
+	}
+
+	public int countEstrelas() throws SQLException, ClassNotFoundException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM estrelas");
+		rs.next();
+		int total = rs.getInt("total");
+		rs.close();
+		st.close();
+		return total;
+	}
 }
