@@ -47,6 +47,9 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.createPlanetasTable();
 			msg += "<h2>Create table planetas sucessful!</h2>\n";
 
+			service.populate7PlanetaTable();
+			msg += "<h2>7 Planetas de exemplo adicionados com sucesso!</h2>\n";
+
 			page.println("<html lang='pt-br'><head><title>Teste</title></head><body>");
 			msg += "<h2>Create table user successful!</h2>\n";
 
