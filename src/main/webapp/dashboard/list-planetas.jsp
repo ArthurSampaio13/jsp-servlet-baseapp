@@ -30,17 +30,17 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
-          <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/planetas">Planetas</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/galaxias">Galaxia</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
         </ul>
         <span class="navbar-text">
-						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
-					</span>
+            <a class="btn btn-success" href="/auth/logoff">Logoff</a>
+          </span>
       </div>
     </div>
   </nav>
-
-
 
   <h1 class="h3 mb-3 fw-normal">Planetas</h1>
 
@@ -58,17 +58,14 @@
       <label class="form-check-label" for="possuiAgua">Possui Água</label>
     </div>
     <button type="submit" class="btn btn-primary mt-3">Adicionar Planeta</button>
-    <p></p>
   </form>
 
   <table class="table">
     <thead>
     <tr>
-      <th scope="col"></th>
       <th scope="col">Nome</th>
       <th scope="col">Densidade</th>
       <th scope="col">Possui Agua</th>
-      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -77,22 +74,55 @@
       for (PlanetaDTO planeta : lista) {
     %>
     <tr>
-      <td>Editar</td>
-      <td><%= planeta.getNome() %></td>
+      <td><a href="#" class="planet-link" data-nome="<%= planeta.getNome() %>" data-densidade="<%= planeta.getDensidade() %>" data-agua="<%= planeta.isPossuiAgua() %>"><%= planeta.getNome() %></a></td>
       <td><%= planeta.getDensidade() %></td>
-      <td><%= planeta.isPossuiAgua() %></td>
-      <td>Apagar</td>
+      <td><%= planeta.isPossuiAgua() ? "Sim" : "Não" %></td>
     </tr>
     <% } %>
     </tbody>
   </table>
 
+  <!-- Modal para exibir informações do planeta -->
+  <div class="modal fade" id="planetModal" tabindex="-1" aria-labelledby="planetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="planetModalLabel">Informações do Planeta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Nome:</strong> <span id="modalNome"></span></p>
+          <p><strong>Densidade:</strong> <span id="modalDensidade"></span></p>
+          <p><strong>Possui Água:</strong> <span id="modalAgua"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const planetLinks = document.querySelectorAll(".planet-link");
+
+    planetLinks.forEach(link => {
+      link.addEventListener("click", function(event) {
+        event.preventDefault()
+
+        document.getElementById("modalNome").textContent = this.dataset.nome;
+        document.getElementById("modalDensidade").textContent = this.dataset.densidade;
+        document.getElementById("modalAgua").textContent = this.dataset.agua === "true" ? "Sim" : "Não";
+
+        new bootstrap.Modal(document.getElementById("planetModal")).show();
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
 
