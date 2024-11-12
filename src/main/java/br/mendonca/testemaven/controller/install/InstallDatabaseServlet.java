@@ -59,35 +59,38 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.createGalaxiaTable();
 			msg += "<h2>Create table galaxias successful!</h2>\n";
 
-			page.println("<html lang='pt-br'><head><title>Install Database</title></head><body>");
-			page.println(msg);
-			/*/
-			page.println("<code>");
-			for (Map.Entry<String,String> pair : env.entrySet()) {
-			    page.println(pair.getKey());
-			    page.println(pair.getValue());
+			service.populate7GalaxiaTable();
+			msg += "<h2>7 Galaxias de exemplo adicionados com sucesso!</h2>\n";
+
+				page.println("<html lang='pt-br'><head><title>Install Database</title></head><body>");
+				page.println(msg);
+				/*/
+				page.println("<code>");
+				for (Map.Entry<String,String> pair : env.entrySet()) {
+					page.println(pair.getKey());
+					page.println(pair.getValue());
+				}
+				//*/
+				page.println("</code>");
+				page.println("</body></html>");
+				page.close();
+
+			} catch (Exception e) {
+				// Escreve as mensagens de Exception em uma p�gina de resposta.
+				// N�o apagar este bloco.
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+
+				page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
+				page.println("<h1>Error</h1>");
+				page.println("<code>");
+				page.println(sw.toString());
+				page.println("</code>");
+				page.println("</body></html>");
+				page.close();
+			} finally {
+
 			}
-			//*/
-			page.println("</code>");
-			page.println("</body></html>");
-			page.close();
-			
-		} catch (Exception e) {
-			// Escreve as mensagens de Exception em uma p�gina de resposta.
-			// N�o apagar este bloco.
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			
-			page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
-			page.println("<h1>Error</h1>");
-			page.println("<code>");
-			page.println(sw.toString());
-			page.println("</code>");
-			page.println("</body></html>");
-			page.close();
-		} finally {
-			
 		}
 	}
-}
