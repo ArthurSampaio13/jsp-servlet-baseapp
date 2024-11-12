@@ -87,6 +87,8 @@ public class InstallService {
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    densidade INT NOT NULL,"
 				+ "    possuiAgua BOOLEAN NOT NULL)");
+
+		statement("ALTER TABLE planetas ADD COLUMN ativo BOOLEAN DEFAULT true;");
 	}
 
 	public void populate7PlanetaTable() throws ClassNotFoundException, SQLException {
