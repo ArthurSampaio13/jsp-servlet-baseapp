@@ -64,7 +64,8 @@
   1. O usuário consegue instalar as novas tabelas do banco com 7 individuos pelo endponit 'install'.
   2. O usuário consegue visualizar todos os individuos listados com paginação de 3 individuos por página.
   3. O usuário pode deletar um individuo cadastrado da listagem, mas o individuo não é apagado do banco, é marcado para não visualização.
-  - 
+  4. O usuario atraves de um item de menu, pode listar os deletados 
+  5. Update readme
 
 
 - Marcos Pierre de Melo Monteiro
