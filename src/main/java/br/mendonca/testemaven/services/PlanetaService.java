@@ -7,6 +7,7 @@ import br.mendonca.testemaven.services.dto.PlanetaDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class PlanetaService {
 
@@ -51,4 +52,10 @@ public class PlanetaService {
         PlanetaDAO dao = new PlanetaDAO();
         return dao.countPlanetas();
     }
+
+    public void deletarLogico(UUID planetaId) throws ClassNotFoundException, SQLException {
+        PlanetaDAO dao = new PlanetaDAO();
+        dao.deletarLogico(planetaId);
+    }
+
 }
