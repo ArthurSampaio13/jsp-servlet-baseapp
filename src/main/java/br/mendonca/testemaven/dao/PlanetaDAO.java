@@ -158,4 +158,19 @@ public class PlanetaDAO {
         return lista;
     }
 
+    public int countPlanetasInativos() throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) AS total FROM planetas WHERE ativo = false");
+        rs.next();
+        int total = rs.getInt("total");
+
+        rs.close();
+        st.close();
+
+        return total;
+    }
+
 }
