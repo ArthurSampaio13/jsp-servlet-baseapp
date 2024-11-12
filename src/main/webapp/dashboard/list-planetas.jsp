@@ -59,11 +59,14 @@
     </div>
     <button type="submit" class="btn btn-primary mt-3">Adicionar Planeta</button>
   </form>
-
+  <p></p>
+  <a href="/dashboard/planetas?viewDeleted=true" class="btn btn-secondary">Ver Planetas Deletados</a>
+  <p></p>
   <table class="table">
     <thead>
     <tr>
       <th scope="col">Nome</th>
+      <th scope="col">Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -72,7 +75,6 @@
       for (PlanetaDTO planeta : lista) {
     %>
     <tr>
-      <!-- Link para exibir informações do planeta no modal -->
       <td>
         <a href="#" class="planet-link"
            data-nome="<%= planeta.getNome() %>"
@@ -81,37 +83,37 @@
           <%= planeta.getNome() %>
         </a>
       </td>
+      <td>
+        <a href="/dashboard/planetas?deleteId=<%= planeta.getUuid() %>" class="btn btn-danger">Deletar</a>
+      </td>
     </tr>
     <% } %>
     </tbody>
   </table>
 
-  <!-- Paginação -->
-  <div class="d-flex justify-content-between align-items-center">
-    <%
-      int currentPage = (int) request.getAttribute("currentPage");
-      int totalPages = (int) request.getAttribute("totalPages");
-      int previousPage = currentPage > 1 ? currentPage - 1 : 1;
-      int nextPage = currentPage < totalPages ? currentPage + 1 : totalPages;
-    %>
+  <div class="d-flex justify-content-between align-items-center"><%
+    Integer currentPage = (Integer) request.getAttribute("currentPage");
+    Integer totalPages = (Integer) request.getAttribute("totalPages");
 
-    <!-- Botão Anterior -->
+    int previousPage = (currentPage != null && currentPage > 1) ? currentPage - 1 : 1;
+    int nextPage = (currentPage != null && currentPage < totalPages) ? currentPage + 1 : 1;
+  %>
+
+    <% if (currentPage != null && totalPages != null) { %>
     <a href="?page=<%= previousPage %>"
        class="btn btn-primary <%= currentPage == 1 ? "disabled" : "" %>">
       Anterior
     </a>
 
-    <!-- Número da Página -->
     <span>Página <%= currentPage %> de <%= totalPages %></span>
 
-    <!-- Botão Próxima -->
     <a href="?page=<%= nextPage %>"
        class="btn btn-primary <%= currentPage == totalPages ? "disabled" : "" %>">
       Próxima
     </a>
+    <% } %>
   </div>
 
-  <!-- Modal para exibir informações do planeta -->
   <div class="modal fade" id="planetModal" tabindex="-1" aria-labelledby="planetModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -142,12 +144,10 @@
       link.addEventListener("click", function(event) {
         event.preventDefault();
 
-        // Pega os dados do planeta a partir dos atributos data-*
         document.getElementById("modalNome").textContent = this.dataset.nome;
         document.getElementById("modalDensidade").textContent = this.dataset.densidade;
         document.getElementById("modalAgua").textContent = this.dataset.agua === "true" ? "Sim" : "Não";
 
-        // Exibe o modal
         new bootstrap.Modal(document.getElementById("planetModal")).show();
       });
     });
