@@ -7,6 +7,7 @@ public class EstrelaDTO {
     private String nome;
     private Integer temperatura;
     private Boolean estaNaViaLactea;
+    private Boolean estaAtivo;
 
     public String getUuid() {
         return uuid;
@@ -34,13 +35,20 @@ public class EstrelaDTO {
         this.estaNaViaLactea = estaNaViaLactea;
     }
 
+    public Boolean getEstaAtivo() {
+        return estaAtivo;
+    }
+    public void setEstaAtivo(Boolean estaAtivo) {
+        this.estaAtivo = estaAtivo;
+    }
+
     public static EstrelaDTO estrelaMapper(Estrela estrela) {
         EstrelaDTO dto = new EstrelaDTO();
         dto.setUuid(estrela.getUuid());
         dto.setNome(estrela.getNome());
         dto.setTemperatura(estrela.getTemperatura());
         dto.setEstaNaViaLactea(estrela.getEstaNaViaLactea());
-
+        dto.setEstaAtivo(estrela.getEstaAtivo());
         return dto;
     }
 
