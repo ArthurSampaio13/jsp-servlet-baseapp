@@ -61,21 +61,24 @@ public class InstallService {
 
 	public void createEstrelaTable() throws ClassNotFoundException, SQLException {
 		statement("CREATE TABLE estrelas ("
-					+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
-					+ "    nome VARCHAR(255) NOT NULL,"
-					+ "    temperatura INTEGER NOT NULL,"
-					+ "    esta_na_via_lactea BOOLEAN NOT NULL)");
+				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    nome VARCHAR(255) NOT NULL,"
+				+ "    temperatura INTEGER NOT NULL,"
+				+ "    esta_na_via_lactea BOOLEAN NOT NULL,"
+				+ "    estaAtivo BOOLEAN NOT NULL DEFAULT true"
+				+ ")");
 	}
 
 	public void populate7EstrelaTable() throws ClassNotFoundException, SQLException {
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Sol', 5778, true)");
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Alpha Centauri', 5790, true)");
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Sirius', 9940, true)");
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Vega', 9602, true)");
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Betelgeuse', 3600, true)");
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Rigel', 12100, true)");
-		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea) VALUES ('Proxima Centauri', 3042, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Sol', 5778, true, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Alpha Centauri', 5790, true, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Sirius', 9940, true, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Vega', 9602, true, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Betelgeuse', 3600, true, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Rigel', 12100, true, true)");
+		statement("INSERT INTO estrelas (nome, temperatura, esta_na_via_lactea, estaAtivo) VALUES ('Proxima Centauri', 3042, true, true)");
 	}
+
 
 	public void deletePlanetasTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS planetas");
