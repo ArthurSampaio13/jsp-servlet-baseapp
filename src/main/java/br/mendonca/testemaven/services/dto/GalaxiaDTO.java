@@ -9,6 +9,7 @@ public class GalaxiaDTO {
     private String nome;
     private int quantidadeDeEstrelas;
     private boolean viaLactea;
+    private boolean isVisible;
 
     public static GalaxiaDTO galaxiaMapper(Galaxia galaxia) {
         GalaxiaDTO dto = new GalaxiaDTO();
@@ -16,6 +17,7 @@ public class GalaxiaDTO {
         dto.nome = galaxia.getNome();
         dto.quantidadeDeEstrelas = galaxia.getQuantidadeDeEstrelas();
         dto.viaLactea = galaxia.isViaLactea();
+        dto.isVisible = galaxia.isVisible();
         return dto;
     }
 
@@ -45,5 +47,17 @@ public class GalaxiaDTO {
 
     public void setViaLactea(boolean viaLactea) {
         this.viaLactea = viaLactea;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 }

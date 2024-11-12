@@ -7,12 +7,18 @@ public class Galaxia {
     private String nome;
     private int quantidadeDeEstrelas;
     private boolean viaLactea;
+    private boolean isVisible;
 
-    public Galaxia(String nome, int quantidadeDeEstrelas, boolean viaLactea) {
+    public Galaxia(String nome, int quantidadeDeEstrelas, boolean viaLactea, boolean isVisible) {
         this.id = UUID.randomUUID();
         this.nome = nome;
         this.quantidadeDeEstrelas = quantidadeDeEstrelas;
         this.viaLactea = viaLactea;
+        this.isVisible = isVisible;
+    }
+
+    public Galaxia() {
+
     }
 
     public UUID getId() {
@@ -45,5 +51,13 @@ public class Galaxia {
 
     public void setViaLactea(boolean viaLactea) {
         this.viaLactea = viaLactea;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 }

@@ -88,6 +88,11 @@
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detalhesModal<%= galaxia.getId() %>">
           Ver Detalhes
         </button>
+        <form method="post" action="/dashboard/galaxias">
+          <input type="hidden" name="galaxiaId" value="<%= galaxia.getId() %>">
+          <input type="hidden" name="action" value="delete">
+          <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
       </li>
 
       <!-- Modal para detalhes da galáxia -->

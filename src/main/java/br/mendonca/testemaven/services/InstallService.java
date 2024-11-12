@@ -42,17 +42,19 @@ public class InstallService {
 				+ "    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    quantidadeDeEstrelas INTEGER NOT NULL,"
-				+ "    viaLactea BOOLEAN NOT NULL)");
+				+ "    viaLactea BOOLEAN NOT NULL,"
+				+ "    isVisible BOOLEAN NOT NULL)");
+
 	}
 
 	public void populate7GalaxiaTable() throws ClassNotFoundException, SQLException {
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Via Láctea', 250000000, true)");
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Andrômeda', 10000000, false)");
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Sombrero', 80000000, false)");
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Triângulo', 4000000, false)");
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Girassol', 3000000, false)");
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Olho Negro', 2000000, false)");
-		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea) VALUES ('Bode', 100000, false)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Via Láctea', 250000000, true,true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Andrômeda', 10000000, false,true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Sombrero', 80000000, false,true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Triângulo', 4000000, false,true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Girassol', 3000000, false,true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Olho Negro', 2000000, false,true)");
+		statement("INSERT INTO galaxias (nome, quantidadeDeEstrelas, viaLactea,isVisible) VALUES ('Bode', 100000, false,true)");
 	}
 
 	public void deleteEstrelaTable() throws ClassNotFoundException, SQLException {
