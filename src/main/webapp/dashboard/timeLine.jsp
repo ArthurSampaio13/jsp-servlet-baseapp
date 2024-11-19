@@ -70,6 +70,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title"><%= atividade.getNome() %></h5>
+          <p class="card-text"> Curtidas: <%= atividade.getQuantidadeCurtidas()%></p>
           <p class="card-text"><%= atividade.getDescricao() %></p>
           <ul>
             <% if (atividade.getTipo().equals("Estrela")) { %>
@@ -83,6 +84,9 @@
               <li>Densidade: <%= atividade.getDensidade() %> g/cm³</li>
             <% } %>
           </ul>
+          <button type="button" class="btn btn-danger" onclick="curtirAtividade('<%= atividade.getId() %>')">
+            curtir
+          </button>
         </div>
       </div>
       <% } %>
@@ -94,7 +98,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
+
+
+<script>
+  function curtirAtividade(uuid) {
+    alert("Curtindo atividade...");
+    alert(uuid);
+    fetch('/curtirPost?uuid=' + uuid, { method: 'POST' })
+            .then(response => {
+              if (response.ok) {
+                alert("Atividade curtida com sucesso.");
+                window.location.reload(true);
+              } else {
+                alert("Erro ao curtir a atividade." + response.status);
+              }
+            });
+  }
+</script>
+
+
 </html>
+
 
 <%
   } else {
