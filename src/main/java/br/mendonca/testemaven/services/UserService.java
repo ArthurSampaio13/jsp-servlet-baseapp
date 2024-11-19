@@ -57,4 +57,24 @@ public class UserService {
 	}
 
 
+
+	public void followUser(String followerUuid, String followedUuid) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+		dao.follow(followerUuid, followedUuid);
+	}
+
+	public void unfollowUser(String followerUuid, String followedUuid) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+		dao.unfollow(followerUuid, followedUuid);
+	}
+
+	public List<UserDTO> listFollowing(String followerUuid) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+		List<User> following = dao.listFollowing(followerUuid);
+		List<UserDTO> followingDTO = new ArrayList<>();
+		for (User user : following) {
+			followingDTO.add(UserDTO.userMapper(user));
+		}
+		return followingDTO;
+	}
 }
