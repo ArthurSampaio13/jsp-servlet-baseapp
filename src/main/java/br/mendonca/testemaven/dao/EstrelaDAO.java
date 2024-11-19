@@ -36,6 +36,7 @@ public class EstrelaDAO {
 			estrela.setNome(rs.getString("nome"));
 			estrela.setTemperatura(rs.getInt("temperatura"));
 			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
+			estrela.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 			lista.add(estrela);
 		}
 		
@@ -61,6 +62,7 @@ public class EstrelaDAO {
 			estrela.setTemperatura(rs.getInt("temperatura"));
 			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
 			estrela.setEstaAtivo(rs.getBoolean("estaAtivo"));
+			estrela.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 		}
 
 		rs.close();
@@ -88,6 +90,7 @@ public class EstrelaDAO {
 			estrela.setTemperatura(rs.getInt("temperatura"));
 			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
 			estrela.setEstaAtivo(rs.getBoolean("estaAtivo"));
+			estrela.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 			lista.add(estrela);
 		}
 
@@ -139,6 +142,7 @@ public class EstrelaDAO {
 			estrela.setTemperatura(rs.getInt("temperatura"));
 			estrela.setEstaNaViaLactea(rs.getBoolean("esta_na_via_lactea"));
 			estrela.setEstaAtivo(rs.getBoolean("estaAtivo"));
+			estrela.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 			lista.add(estrela);
 		}
 

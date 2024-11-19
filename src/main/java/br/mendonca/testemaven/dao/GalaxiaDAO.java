@@ -2,6 +2,7 @@ package br.mendonca.testemaven.dao;
 
 import br.mendonca.testemaven.model.entities.Galaxia;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -37,8 +38,9 @@ public class GalaxiaDAO {
             String nome = rs.getString("nome");
             int quantidadeDeEstrelas = rs.getInt("quantidadeDeEstrelas");
             boolean viaLactea = rs.getBoolean("viaLactea");
+            LocalDateTime dateCreated = rs.getTimestamp("dateCreated").toLocalDateTime();
 
-            Galaxia galaxia = new Galaxia(nome, quantidadeDeEstrelas, viaLactea, true);
+            Galaxia galaxia = new Galaxia(nome, quantidadeDeEstrelas, viaLactea, true, dateCreated);
             galaxia.setId(id);
             lista.add(galaxia);
         }
@@ -68,7 +70,7 @@ public class GalaxiaDAO {
             galaxia.setQuantidadeDeEstrelas(rs.getInt("quantidadeDeEstrelas"));
             galaxia.setViaLactea(rs.getBoolean("viaLactea"));
             galaxia.setVisible(rs.getBoolean("isVisible"));
-
+            galaxia.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
             lista.add(galaxia);
         }
 
@@ -129,6 +131,7 @@ public class GalaxiaDAO {
             galaxia.setQuantidadeDeEstrelas(rs.getInt("quantidadeDeEstrelas"));
             galaxia.setViaLactea(rs.getBoolean("viaLactea"));
             galaxia.setVisible(rs.getBoolean("isVisible"));
+            galaxia.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 
             lista.add(galaxia);
         }
@@ -169,6 +172,7 @@ public class GalaxiaDAO {
             galaxia.setQuantidadeDeEstrelas(rs.getInt("quantidadeDeEstrelas"));
             galaxia.setViaLactea(rs.getBoolean("viaLactea"));
             galaxia.setVisible(rs.getBoolean("isVisible"));
+            galaxia.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
         }
 
         rs.close();
