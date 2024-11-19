@@ -19,42 +19,29 @@ public class ListUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter page = response.getWriter();
-		
 		try {
-			String name = request.getParameter("name"); // Parâmetro de pesquisa
+			String name = request.getParameter("name");
+			String idadeMinStr = request.getParameter("idadeMin");
+			String idadeMaxStr = request.getParameter("idadeMax");
+			String statusStr = request.getParameter("status");
+
+			Integer idadeMin = (idadeMinStr != null && !idadeMinStr.isEmpty()) ? Integer.parseInt(idadeMinStr) : null;
+			Integer idadeMax = (idadeMaxStr != null && !idadeMaxStr.isEmpty()) ? Integer.parseInt(idadeMaxStr) : null;
+			Boolean status = (statusStr != null && !statusStr.isEmpty()) ? Boolean.parseBoolean(statusStr) : null;
+
 			UserService service = new UserService();
-			List<UserDTO> lista;
+			List<UserDTO> lista = service.filterUsers(name, idadeMin, idadeMax, status);
 
-			if (name != null && !name.isEmpty()) {
-				lista = service.searchByName(name); // Filtra pelo nome
-			} else {
-				lista = service.listAllUsers(); // Lista todos os usuários
-			}
+			request.setAttribute("lista", lista);
+			request.setAttribute("searchQuery", name);
+			request.setAttribute("idadeMinQuery", idadeMinStr);
+			request.setAttribute("idadeMaxQuery", idadeMaxStr);
+			request.setAttribute("statusQuery", statusStr);
 
-			// Garante que a lista seja atribuída mesmo se estiver vazia
-			if (lista == null) {
-				lista = new ArrayList<>();
-			}
-
-			request.setAttribute("lista", lista); // Atribui a lista ao request
-			request.setAttribute("searchQuery", name); // Atribui a consulta ao request (para reutilizar no formulário)
-			request.getRequestDispatcher("/dashboard/list-users.jsp").forward(request, response); // Redireciona para o JSP
+			request.getRequestDispatcher("/dashboard/list-users.jsp").forward(request, response);
 		} catch (Exception e) {
-			// Escreve as mensagens de Exception em uma p�gina de resposta.
-			// N�o apagar este bloco.
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			
-			page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
-			page.println("<h1>Error</h1>");
-			page.println("<code>" + sw.toString() + "</code>");
-			page.println("</body></html>");
-			page.close();
-		} finally {
-			
+			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao carregar usuários.");
 		}
 	}
 	
@@ -104,7 +91,6 @@ public class ListUsersServlet extends HttpServlet {
 				UserService service = new UserService();
 				List<UserDTO> users = service.searchByName(name);
 
-				// Construção manual do JSON
 				StringBuilder json = new StringBuilder("[");
 				for (int i = 0; i < users.size(); i++) {
 					UserDTO user = users.get(i);
