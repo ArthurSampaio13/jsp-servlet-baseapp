@@ -3,6 +3,7 @@ package br.mendonca.testemaven.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.mendonca.testemaven.services.UserService;
@@ -22,12 +23,24 @@ public class ListUsersServlet extends HttpServlet {
 		PrintWriter page = response.getWriter();
 		
 		try {
+			String name = request.getParameter("name"); // Parâmetro de pesquisa
 			UserService service = new UserService();
-			List<UserDTO> lista = service.listAllUsers();
-			
-			// Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
-			request.setAttribute("lista", lista);
-			request.getRequestDispatcher("list-users.jsp").forward(request, response);
+			List<UserDTO> lista;
+
+			if (name != null && !name.isEmpty()) {
+				lista = service.searchByName(name); // Filtra pelo nome
+			} else {
+				lista = service.listAllUsers(); // Lista todos os usuários
+			}
+
+			// Garante que a lista seja atribuída mesmo se estiver vazia
+			if (lista == null) {
+				lista = new ArrayList<>();
+			}
+
+			request.setAttribute("lista", lista); // Atribui a lista ao request
+			request.setAttribute("searchQuery", name); // Atribui a consulta ao request (para reutilizar no formulário)
+			request.getRequestDispatcher("/dashboard/list-users.jsp").forward(request, response); // Redireciona para o JSP
 		} catch (Exception e) {
 			// Escreve as mensagens de Exception em uma p�gina de resposta.
 			// N�o apagar este bloco.
