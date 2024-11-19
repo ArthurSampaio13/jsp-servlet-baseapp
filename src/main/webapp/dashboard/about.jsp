@@ -75,7 +75,7 @@
 		<tr>
 			<td scope="col">Arthur Lopes Filgueira Sampaio</th>
 			<td scope="col">Planetas</th>
-			<td scope="col">Coloque aqui sua regra de negócio</th>
+			<td scope="col">o usuário pode, na listagem de usuário, procurar por um usuário por parte do nome e utilizar filtros: um para a propriedade de número idade e outro para a propriedade booleana status. Os dados do banco devem vir filtrados por um ou mais endpoints</th>
 		</tr>
 		<tr>
 			<td scope="col">Marcos Pierre de Melo Monteiro</th>
