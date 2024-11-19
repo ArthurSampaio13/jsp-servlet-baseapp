@@ -6,7 +6,6 @@
 <%
 	if (session.getAttribute("user") != null) {
 %>
-
 <!doctype html>
 <html lang="pt-br" data-bs-theme="dark">
 <head>
@@ -36,6 +35,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/dashboard/timeLine.jsp">TimeLine</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/estrelasDeletadas.jsp">Estrelas deletadas</a></li>
@@ -70,12 +70,12 @@
 		<tr>
 			<td scope="col">Jeová Bezerra Leite</th>
 			<td scope="col">Estrelas</th>
-			<td scope="col">Coloque aqui sua regra de negócio</th>
+			<td scope="col">O usuário pode visulizar uma lista de ativiades pelo tempo (timeline) seus e dos outros usuários que cadastraram alguma entidade e curtir a atividade, a atividade na timeline mostra a quantidade de curtidas</th>
 		</tr>
 		<tr>
 			<td scope="col">Arthur Lopes Filgueira Sampaio</th>
 			<td scope="col">Planetas</th>
-			<td scope="col">Coloque aqui sua regra de negócio</th>
+			<td scope="col">o usuário pode, na listagem de usuário, procurar por um usuário por parte do nome e utilizar filtros: um para a propriedade de número idade e outro para a propriedade booleana status. Os dados do banco devem vir filtrados por um ou mais endpoints</th>
 		</tr>
 		<tr>
 			<td scope="col">Marcos Pierre de Melo Monteiro</th>

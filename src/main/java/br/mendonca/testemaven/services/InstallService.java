@@ -30,7 +30,10 @@ public class InstallService {
 				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
 				+ "    name VARCHAR(255) NOT NULL,"
 				+ "    email VARCHAR(255) NOT NULL,"
-				+ "    password VARCHAR(255) NOT NULL)");
+				+ "    password VARCHAR(255) NOT NULL,"
+				+ "    idade INTEGER NOT NULL,"
+				+ "    status BOOLEAN NOT NULL"
+				+ ")");
 	}
 
 	public void createSeguidoresTable() throws ClassNotFoundException, SQLException {
@@ -54,8 +57,8 @@ public class InstallService {
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    quantidadeDeEstrelas INTEGER NOT NULL,"
 				+ "    viaLactea BOOLEAN NOT NULL,"
-				+ "    isVisible BOOLEAN NOT NULL)");
-
+				+ "    isVisible BOOLEAN NOT NULL,"
+				+ "    dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 	}
 
 	public void populate7GalaxiaTable() throws ClassNotFoundException, SQLException {
@@ -78,8 +81,8 @@ public class InstallService {
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    temperatura INTEGER NOT NULL,"
 				+ "    esta_na_via_lactea BOOLEAN NOT NULL,"
-				+ "    estaAtivo BOOLEAN NOT NULL DEFAULT true"
-				+ ")");
+				+ "    estaAtivo BOOLEAN NOT NULL DEFAULT true,"
+				+ "    dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 	}
 
 	public void populate7EstrelaTable() throws ClassNotFoundException, SQLException {
@@ -105,6 +108,7 @@ public class InstallService {
 				+ "    possuiAgua BOOLEAN NOT NULL)");
 
 		statement("ALTER TABLE planetas ADD COLUMN ativo BOOLEAN DEFAULT true;");
+		statement("ALTER TABLE planetas ADD COLUMN dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP;");
 	}
 
 	public void populate7PlanetaTable() throws ClassNotFoundException, SQLException {
@@ -115,5 +119,17 @@ public class InstallService {
 		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Vênus', 5243, false)");
 		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Netuno', 1638, false)");
 		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Mercúrio', 5427, false)");
+	}
+
+	public void createTableCurtidas() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE curtidas ("
+				+ "		id UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ " 	code_post VARCHAR(255) NOT NULL,"
+				+ " 	quantidade_curtidas INTEGER NOT NULL)"
+		);
+	}
+
+	public void deleteTableCurtidas() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS curtidas");
 	}
 }

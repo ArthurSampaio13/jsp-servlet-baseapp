@@ -15,45 +15,54 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Caso o usuário tente acessar este end point pelo método GET, recebe a página de formulário JSP.
 		response.sendRedirect("form-register.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter page = response.getWriter();
-		
+
 		try {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String pass = request.getParameter("password");
-			
-			User user = new User(); 
+			String idadeStr = request.getParameter("idade");
+			String statusStr = request.getParameter("status");
+
+			if (name == null || name.isEmpty() || email == null || email.isEmpty() || pass == null || pass.isEmpty()) {
+				throw new IllegalArgumentException("Nome, e-mail e senha sÃ£o obrigatÃ³rios!");
+			}
+
+			int idade = Integer.parseInt(idadeStr);
+			boolean status = Boolean.parseBoolean(statusStr);
+
+			User user = new User();
 			user.setName(name);
 			user.setEmail(email);
 			user.setPassword(pass);
-			
+			user.setIdade(idade);
+			user.setStatus(status);
+
+			// Registra o usuÃ¡rio no banco
 			UserDAO userDAO = new UserDAO();
 			userDAO.register(user);
-			
+
+			// Redireciona para a pÃ¡gina inicial
 			response.sendRedirect("index.jsp");
-			
+
 		} catch (Exception e) {
-			// Escreve as mensagens de Exception em uma página de resposta.
+			// Escreve as mensagens de Exception em uma pÃ¡gina de resposta
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
-			
+
 			page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
 			page.println("<h1>Error</h1>");
 			page.println("<code>" + sw.toString() + "</code>");
 			page.println("</body></html>");
 			page.close();
-		} finally {
-			
 		}
 	}
-
 }

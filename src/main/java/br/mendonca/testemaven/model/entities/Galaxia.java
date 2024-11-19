@@ -1,5 +1,6 @@
 package br.mendonca.testemaven.model.entities;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Galaxia {
@@ -8,6 +9,15 @@ public class Galaxia {
     private int quantidadeDeEstrelas;
     private boolean viaLactea;
     private boolean isVisible;
+    private LocalDateTime dateCreated;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public Galaxia(String nome, int quantidadeDeEstrelas, boolean viaLactea, boolean isVisible) {
         this.id = UUID.randomUUID();
@@ -15,6 +25,15 @@ public class Galaxia {
         this.quantidadeDeEstrelas = quantidadeDeEstrelas;
         this.viaLactea = viaLactea;
         this.isVisible = isVisible;
+    }
+
+    public Galaxia(String nome, int quantidadeDeEstrelas, boolean viaLactea, boolean isVisible, LocalDateTime dateCreated) {
+        this.id = UUID.randomUUID();
+        this.nome = nome;
+        this.quantidadeDeEstrelas = quantidadeDeEstrelas;
+        this.viaLactea = viaLactea;
+        this.isVisible = isVisible;
+        this.dateCreated = dateCreated;
     }
 
     public Galaxia() {

@@ -8,8 +8,10 @@ public class UserDTO {
 	
 	private String name;
 	private String email;
+	private int idade;
+	private boolean status;
 	private String userId;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -23,6 +25,23 @@ public class UserDTO {
 		this.email = email;
 	}
 
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
 	public String getUserId() {
 		return userId;
 	}
@@ -35,8 +54,10 @@ public class UserDTO {
 		UserDTO dto = new UserDTO();
 		dto.setName(user.getName());
 		dto.setEmail(user.getEmail());
+		dto.setIdade(user.getIdade());
+		dto.setStatus(user.isStatus());
 		dto.setUserId(user.getUuid());
-		
+
 		return dto;
 	}
 }

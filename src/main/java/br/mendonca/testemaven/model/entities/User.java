@@ -6,6 +6,8 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
+	private int idade;
+	private boolean status;
 	
 	public String getUuid() {
 		return uuid;
@@ -30,5 +32,20 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

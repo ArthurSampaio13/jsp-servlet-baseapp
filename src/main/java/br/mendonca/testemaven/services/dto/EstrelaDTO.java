@@ -2,12 +2,22 @@ package br.mendonca.testemaven.services.dto;
 
 import br.mendonca.testemaven.model.entities.Estrela;
 
+import java.time.LocalDateTime;
+
 public class EstrelaDTO {
     private String uuid;
     private String nome;
     private Integer temperatura;
     private Boolean estaNaViaLactea;
     private Boolean estaAtivo;
+    private LocalDateTime dateCreated;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public String getUuid() {
         return uuid;
@@ -49,6 +59,7 @@ public class EstrelaDTO {
         dto.setTemperatura(estrela.getTemperatura());
         dto.setEstaNaViaLactea(estrela.getEstaNaViaLactea());
         dto.setEstaAtivo(estrela.getEstaAtivo());
+        dto.setDateCreated(estrela.getDateCreated());
         return dto;
     }
 

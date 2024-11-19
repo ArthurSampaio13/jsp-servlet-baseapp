@@ -29,7 +29,7 @@ public class PlanetaDAO {
         conn.setAutoCommit(true);
 
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM planetas");
+        ResultSet rs = st.executeQuery("SELECT * FROM planetas WHERE ativo = true");
 
         while (rs.next()) {
             Planeta planeta = new Planeta();
@@ -37,6 +37,7 @@ public class PlanetaDAO {
             planeta.setNome(rs.getString("nome"));
             planeta.setDensidade(rs.getInt("densidade"));
             planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
+            planeta.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 
             lista.add(planeta);
         }
@@ -95,6 +96,7 @@ public class PlanetaDAO {
             planeta.setDensidade(rs.getInt("densidade"));
             planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
             planeta.setAtivo(rs.getBoolean("ativo"));
+            planeta.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 
             lista.add(planeta);
         }
@@ -148,6 +150,7 @@ public class PlanetaDAO {
             planeta.setDensidade(rs.getInt("densidade"));
             planeta.setPossuiAgua(rs.getBoolean("possuiAgua"));
             planeta.setAtivo(rs.getBoolean("ativo"));
+            planeta.setDateCreated(rs.getTimestamp("dateCreated").toLocalDateTime());
 
             lista.add(planeta);
         }

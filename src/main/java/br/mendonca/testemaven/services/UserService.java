@@ -34,6 +34,30 @@ public class UserService {
 		return resp;
 	}
 
+	public List<UserDTO> searchByName(String name) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+		List<User> users = dao.searchByName(name);
+
+		List<UserDTO> result = new ArrayList<>();
+		for (User user : users) {
+			result.add(UserDTO.userMapper(user));
+		}
+		return result;
+	}
+
+	public List<UserDTO> filterUsers(String name, Integer idadeMin, Integer idadeMax, Boolean status) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+		List<User> users = dao.filterUsers(name, idadeMin, idadeMax, status);
+
+		List<UserDTO> result = new ArrayList<>();
+		for (User user : users) {
+			result.add(UserDTO.userMapper(user));
+		}
+		return result;
+	}
+
+
+
 	public void followUser(String followerUuid, String followedUuid) throws ClassNotFoundException, SQLException {
 		UserDAO dao = new UserDAO();
 		dao.follow(followerUuid, followedUuid);

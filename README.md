@@ -77,3 +77,7 @@
   3. O usuário pode deletar um individuo cadastrado da listagem, mas o individuo não é apagado do banco, é marcado para não visualização.
   4. O usuario atraves de um item de menu, pode listar os deletados
   5. Update readme
+
+## 4° Demanda
+- Arthur Lopes Filgueira Sampaio
+  1. O usuário pode, na listagem de usuário, procurar por um usuário por parte do nome e utilizar filtros: um para a propriedade de número idade e outro para a propriedade booleana status. Os dados do banco devem vir filtrados por um ou mais endpoints

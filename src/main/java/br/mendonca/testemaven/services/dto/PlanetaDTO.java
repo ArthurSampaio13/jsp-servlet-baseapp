@@ -2,6 +2,7 @@ package br.mendonca.testemaven.services.dto;
 
 import br.mendonca.testemaven.model.entities.Planeta;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class PlanetaDTO {
@@ -10,6 +11,14 @@ public class PlanetaDTO {
     private int densidade;
     private boolean possuiAgua;
     private boolean ativo = true;
+    private LocalDateTime dateCreated;
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public UUID getUuid() {
         return uuid;
@@ -58,7 +67,7 @@ public class PlanetaDTO {
         planetaDTO.setDensidade(planeta.getDensidade());
         planetaDTO.setPossuiAgua(planeta.isPossuiAgua());
         planetaDTO.setAtivo(planeta.isAtivo());
-
+        planetaDTO.setDateCreated(planeta.getDateCreated());
         return planetaDTO;
     }
 }
