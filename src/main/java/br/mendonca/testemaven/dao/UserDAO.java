@@ -102,4 +102,29 @@ public class UserDAO {
 		
 		return lista;
 	}
+
+	public List<User> searchByName(String name) throws ClassNotFoundException, SQLException {
+		List<User> users = new ArrayList<>();
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE LOWER(name) LIKE LOWER(?)");
+		ps.setString(1, "%" + name + "%");
+
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			User user = new User();
+			user.setUuid(rs.getString("uuid"));
+			user.setName(rs.getString("name"));
+			user.setEmail(rs.getString("email"));
+			user.setPassword(rs.getString("password")); // Evite expor a senha no DTO
+			users.add(user);
+		}
+
+		rs.close();
+		ps.close();
+		return users;
+	}
+
+
 }
