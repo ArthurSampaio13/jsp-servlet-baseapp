@@ -1,8 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.mendonca.testemaven.services.dto.UserDTO"%>
+<%@ page import="java.util.ArrayList" %>
 
-<% if (session.getAttribute("user") != null && request.getAttribute("lista") != null) { %>
+<%
+	List<UserDTO> lista = (List<UserDTO>) request.getAttribute("lista");
+	if (lista == null) {
+		lista = new ArrayList<>();
+	}
+
+	String searchQuery = (String) request.getAttribute("searchQuery");
+	if (searchQuery == null) {
+		searchQuery = "";
+	}
+
+	String idadeMinQuery = (String) request.getAttribute("idadeMinQuery");
+	if (idadeMinQuery == null) {
+		idadeMinQuery = "";
+	}
+
+	String idadeMaxQuery = (String) request.getAttribute("idadeMaxQuery");
+	if (idadeMaxQuery == null) {
+		idadeMaxQuery = "";
+	}
+
+	String statusQuery = (String) request.getAttribute("statusQuery");
+%>
 
 <!doctype html>
 <html lang="pt-br" data-bs-theme="dark">
@@ -14,9 +37,7 @@
 	<link href="style.css" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
-
 <main class="w-100 m-auto form-container">
-
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/dashboard/dashboard.jsp">Gerência de Configuração</a>
@@ -29,7 +50,6 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="/dashboard/timeLine.jsp">TimeLine</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/estrelasDeletadas.jsp">Estrelas deletadas</a></li>
@@ -45,41 +65,70 @@
 			</div>
 		</div>
 	</nav>
-
-
-
 	<h1 class="h3 mb-3 fw-normal">Usuários</h1>
+
+	<!-- Formulário de Pesquisa -->
+	<form method="get" action="/dashboard/users" class="mb-3">
+		<div class="row g-3">
+			<div class="col">
+				<input type="text" name="name" class="form-control" placeholder="Nome" value="<%= searchQuery %>">
+			</div>
+			<div class="col">
+				<input type="number" name="idadeMin" class="form-control" placeholder="Idade Mínima" value="<%= idadeMinQuery %>">
+			</div>
+			<div class="col">
+				<input type="number" name="idadeMax" class="form-control" placeholder="Idade Máxima" value="<%= idadeMaxQuery %>">
+			</div>
+			<div class="col">
+				<select name="status" class="form-select">
+					<option value="">Status</option>
+					<option value="true" <%= "true".equals(statusQuery) ? "selected" : "" %>>Ativo</option>
+					<option value="false" <%= "false".equals(statusQuery) ? "selected" : "" %>>Inativo</option>
+				</select>
+			</div>
+			<div class="col">
+				<button type="submit" class="btn btn-primary">Filtrar</button>
+			</div>
+		</div>
+	</form>
+
+	<!-- Tabela de Resultados -->
 	<table class="table">
 		<thead>
 		<tr>
 			<th scope="col"></th>
 			<th scope="col">Nome</th>
 			<th scope="col">E-mail</th>
+			<th scope="col">Idade</th>
+			<th scope="col">Status</th>
 			<th scope="col"></th>
 		</tr>
 		</thead>
 		<tbody>
 		<%
-			List<UserDTO> lista = (List<UserDTO>) request.getAttribute("lista");
+			if (lista.isEmpty()) {
+		%>
+		<tr>
+			<td colspan="6">Nenhum usuário encontrado.</td>
+		</tr>
+		<%
+		} else {
 			for (UserDTO user : lista) {
 		%>
 		<tr>
 			<td>Editar</td>
 			<td><%= user.getName() %></td>
 			<td><%= user.getEmail() %></td>
+			<td><%= user.getIdade() %></td>
+			<td><%= user.isStatus() ? "Ativo" : "Inativo" %></td>
 			<td>Apagar</td>
 		</tr>
-		<% } %>
+		<%
+				}
+			}
+		%>
 		</tbody>
 	</table>
-
-
 </main>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<% } %>
