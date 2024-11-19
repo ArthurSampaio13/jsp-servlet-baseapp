@@ -30,7 +30,10 @@ public class InstallService {
 				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
 				+ "    name VARCHAR(255) NOT NULL,"
 				+ "    email VARCHAR(255) NOT NULL,"
-				+ "    password VARCHAR(255) NOT NULL)");
+				+ "    password VARCHAR(255) NOT NULL,"
+				+ "    idade INTEGER NOT NULL,"
+				+ "    status BOOLEAN NOT NULL"
+				+ ")");
 	}
 
 	public void deleteGalaxiaTable() throws ClassNotFoundException, SQLException {
