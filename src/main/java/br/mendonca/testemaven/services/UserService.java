@@ -45,5 +45,16 @@ public class UserService {
 		return result;
 	}
 
+	public List<UserDTO> filterUsers(String name, Integer idadeMin, Integer idadeMax, Boolean status) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+		List<User> users = dao.filterUsers(name, idadeMin, idadeMax, status);
+
+		List<UserDTO> result = new ArrayList<>();
+		for (User user : users) {
+			result.add(UserDTO.userMapper(user));
+		}
+		return result;
+	}
+
 
 }
