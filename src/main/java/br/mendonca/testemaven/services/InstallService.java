@@ -43,8 +43,8 @@ public class InstallService {
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    quantidadeDeEstrelas INTEGER NOT NULL,"
 				+ "    viaLactea BOOLEAN NOT NULL,"
-				+ "    isVisible BOOLEAN NOT NULL)");
-
+				+ "    isVisible BOOLEAN NOT NULL,"
+				+ "    dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 	}
 
 	public void populate7GalaxiaTable() throws ClassNotFoundException, SQLException {
@@ -67,8 +67,8 @@ public class InstallService {
 				+ "    nome VARCHAR(255) NOT NULL,"
 				+ "    temperatura INTEGER NOT NULL,"
 				+ "    esta_na_via_lactea BOOLEAN NOT NULL,"
-				+ "    estaAtivo BOOLEAN NOT NULL DEFAULT true"
-				+ ")");
+				+ "    estaAtivo BOOLEAN NOT NULL DEFAULT true,"
+				+ "    dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 	}
 
 	public void populate7EstrelaTable() throws ClassNotFoundException, SQLException {
@@ -94,6 +94,7 @@ public class InstallService {
 				+ "    possuiAgua BOOLEAN NOT NULL)");
 
 		statement("ALTER TABLE planetas ADD COLUMN ativo BOOLEAN DEFAULT true;");
+		statement("ALTER TABLE planetas ADD COLUMN dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP;");
 	}
 
 	public void populate7PlanetaTable() throws ClassNotFoundException, SQLException {
