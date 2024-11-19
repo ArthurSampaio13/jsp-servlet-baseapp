@@ -35,6 +35,12 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.createUserTable();
 			msg += "<h2>Create table user sucessful!</h2>\n";
 
+			service.deleteSeguidoresTable();
+			msg += "<h2>deleted table seguidores sucessful!</h2>\n";
+
+			service.createSeguidoresTable();
+			msg += "<h2>Create table seguidores sucessful!</h2>\n";
+
 			service.createEstrelaTable();
 			msg += "<h2>Create table estrela sucessful!</h2>\n";
 

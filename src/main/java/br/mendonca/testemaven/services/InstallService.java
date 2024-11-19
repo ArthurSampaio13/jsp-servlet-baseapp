@@ -33,6 +33,17 @@ public class InstallService {
 				+ "    password VARCHAR(255) NOT NULL)");
 	}
 
+	public void createSeguidoresTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE followers (\n" +
+				"    follower_uuid UUID,\n" +
+				"    followed_uuid UUID\n" +
+				");");
+	}
+
+	public void deleteSeguidoresTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS followers");
+	}
+
 	public void deleteGalaxiaTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS galaxias");
 	}

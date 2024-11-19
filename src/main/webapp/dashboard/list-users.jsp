@@ -14,9 +14,9 @@
   	<link href="style.css" rel="stylesheet">
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
-  
+
     <main class="w-100 m-auto form-container">
-    
+
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="/dashboard/dashboard.jsp">Gerência de Configuração</a>
@@ -36,6 +36,7 @@
 						<li class="nav-item"><a class="nav-link" href="/dashboard/planetas?viewDeleted=true">Planetas deletados</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/list-galaxias.jsp">Galaxias</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/galaxiasDeletadas.jsp">Galaxias deletadas</a></li>
+						<li class="nav-item"><a class="nav-link" href="/dashboard/seguindo?action=listFollowing">Seguindo</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
 					</ul>
 					<span class="navbar-text">
@@ -44,9 +45,9 @@
 				</div>
 			</div>
 		</nav>
-    
-    
-    
+
+
+
     	<h1 class="h3 mb-3 fw-normal">Usuários</h1>
 		<table class="table">
 			<thead>
@@ -54,6 +55,7 @@
 					<th scope="col"></th>
 					<th scope="col">Nome</th>
 					<th scope="col">E-mail</th>
+					<th scope="col">Seguir</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -66,17 +68,25 @@
 				<td>Editar</td>
 				<td><%= user.getName() %></td>
 				<td><%= user.getEmail() %></td>
+				<td>
+					<form method="post" action="/dashboard/seguindo?action=follow">
+						<input type="hidden" name="action" value="follow">
+						<input type="hidden" name="followerUuid" value="<%= session.getAttribute("userUuid") %>">
+						<input type="hidden" name="followedUuid" value="<%= user.getUserId() %>">
+						<button type="submit" class="btn btn-primary btn-sm">Seguir</button>
+					</form>
+				</td>
 				<td>Apagar</td>
 			</tr>
 			<% } %>
 			</tbody>
 		</table>
-		
-		
+
+
 	</main>
-    
-    
-    
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
