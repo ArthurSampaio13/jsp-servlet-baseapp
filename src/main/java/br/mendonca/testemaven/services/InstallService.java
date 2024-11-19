@@ -105,4 +105,16 @@ public class InstallService {
 		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Netuno', 1638, false)");
 		statement("INSERT INTO planetas (nome, densidade, possuiAgua) VALUES ('Mercúrio', 5427, false)");
 	}
+
+	public void createTableCurtidas() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE curtidas ("
+				+ "		id UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ " 	code_post VARCHAR(255) NOT NULL,"
+				+ " 	quantidade_curtidas INTEGER NOT NULL)"
+		);
+	}
+
+	public void deleteTableCurtidas() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS curtidas");
+	}
 }
