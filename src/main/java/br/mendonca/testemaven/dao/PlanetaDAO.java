@@ -29,7 +29,7 @@ public class PlanetaDAO {
         conn.setAutoCommit(true);
 
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM planetas");
+        ResultSet rs = st.executeQuery("SELECT * FROM planetas WHERE ativo = true");
 
         while (rs.next()) {
             Planeta planeta = new Planeta();

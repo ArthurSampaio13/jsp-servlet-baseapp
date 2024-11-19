@@ -31,7 +31,7 @@ public class GalaxiaDAO {
         conn.setAutoCommit(true);
 
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM galaxias");
+        ResultSet rs = st.executeQuery("SELECT * FROM galaxias WHERE isVisible = true");
 
         while (rs.next()) {
             UUID id = (UUID) rs.getObject("id"); // Alterado para usar getObject

@@ -28,7 +28,7 @@ public class EstrelaDAO {
 		conn.setAutoCommit(true);
 		
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM estrelas");
+		ResultSet rs = st.executeQuery("SELECT * FROM estrelas WHERE estaAtivo = true");
 		
 		while (rs.next()) {
 			Estrela estrela = new Estrela();
