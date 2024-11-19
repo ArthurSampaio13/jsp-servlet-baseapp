@@ -90,4 +90,40 @@ public class ListUsersServlet extends HttpServlet {
 			
 		}
 	}
+
+	@WebServlet("/dashboard/users/search")
+	public class SearchUsersServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+
+			try {
+				String name = request.getParameter("name");
+				UserService service = new UserService();
+				List<UserDTO> users = service.searchByName(name);
+
+				// Construção manual do JSON
+				StringBuilder json = new StringBuilder("[");
+				for (int i = 0; i < users.size(); i++) {
+					UserDTO user = users.get(i);
+					json.append("{")
+							.append("\"name\":\"").append(user.getName()).append("\",")
+							.append("\"email\":\"").append(user.getEmail()).append("\"")
+							.append("}");
+					if (i < users.size() - 1) {
+						json.append(",");
+					}
+				}
+				json.append("]");
+
+				response.getWriter().write(json.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				response.getWriter().write("{\"error\":\"Internal server error\"}");
+			}
+		}
+	}
 }
