@@ -70,7 +70,7 @@
 		<tr>
 			<td scope="col">Jeová Bezerra Leite</th>
 			<td scope="col">Estrelas</th>
-			<td scope="col">o usuário pode visulizar uma lista de ativiades pelo tempo (timeline) seus e dos outros usuários que cadastraram alguma entidade e curtir a atividade, a atividade na timeline mostra a quantidade de curtidas</th>
+			<td scope="col">O usuário pode visulizar uma lista de ativiades pelo tempo (timeline) seus e dos outros usuários que cadastraram alguma entidade e curtir a atividade, a atividade na timeline mostra a quantidade de curtidas</th>
 		</tr>
 		<tr>
 			<td scope="col">Arthur Lopes Filgueira Sampaio</th>
