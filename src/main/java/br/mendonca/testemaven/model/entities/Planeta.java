@@ -1,5 +1,6 @@
 package br.mendonca.testemaven.model.entities;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Planeta {
@@ -8,6 +9,15 @@ public class Planeta {
     private int densidade;
     private boolean possuiAgua;
     private boolean ativo = true;
+    private LocalDateTime dateCreated;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public boolean isAtivo() {
         return ativo;
