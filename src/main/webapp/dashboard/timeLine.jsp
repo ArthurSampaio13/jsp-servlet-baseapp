@@ -102,15 +102,12 @@
 
 <script>
   function curtirAtividade(uuid) {
-    alert("Curtindo atividade...");
-    alert(uuid);
     fetch('/curtirPost?uuid=' + uuid, { method: 'POST' })
             .then(response => {
               if (response.ok) {
-                alert("Atividade curtida com sucesso.");
                 window.location.reload(true);
               } else {
-                alert("Erro ao curtir a atividade." + response.status);
+                alert('Erro ao curtir atividade');
               }
             });
   }
