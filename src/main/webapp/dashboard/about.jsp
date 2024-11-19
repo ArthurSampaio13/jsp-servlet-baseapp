@@ -6,7 +6,6 @@
 <%
 	if (session.getAttribute("user") != null) {
 %>
-
 <!doctype html>
 <html lang="pt-br" data-bs-theme="dark">
 <head>
@@ -36,6 +35,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/dashboard/timeLine.jsp">TimeLine</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/estrelas.jsp">Estrelas</a></li>
 					<li class="nav-item"><a class="nav-link" href="/dashboard/estrelasDeletadas.jsp">Estrelas deletadas</a></li>

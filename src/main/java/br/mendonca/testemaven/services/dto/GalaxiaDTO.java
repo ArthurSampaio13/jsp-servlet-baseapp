@@ -2,6 +2,7 @@ package br.mendonca.testemaven.services.dto;
 
 import br.mendonca.testemaven.model.entities.Galaxia;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class GalaxiaDTO {
@@ -10,6 +11,15 @@ public class GalaxiaDTO {
     private int quantidadeDeEstrelas;
     private boolean viaLactea;
     private boolean isVisible;
+    private LocalDateTime dateCreated;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public static GalaxiaDTO galaxiaMapper(Galaxia galaxia) {
         GalaxiaDTO dto = new GalaxiaDTO();
@@ -18,6 +28,7 @@ public class GalaxiaDTO {
         dto.quantidadeDeEstrelas = galaxia.getQuantidadeDeEstrelas();
         dto.viaLactea = galaxia.isViaLactea();
         dto.isVisible = galaxia.isVisible();
+        dto.dateCreated = galaxia.getDateCreated();
         return dto;
     }
 
