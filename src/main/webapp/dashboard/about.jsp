@@ -80,7 +80,7 @@
 		<tr>
 			<td scope="col">Marcos Pierre de Melo Monteiro</th>
 			<td scope="col">Galaxia</th>
-			<td scope="col">Coloque aqui sua regra de negócio</th>
+			<td scope="col">O usuario pode, na listagem de usuarios, selecionar um usuário para seguir e através do endpoint 'seguindo' visualizar quem ele segue e deixar de seguir</th>
 		</tr>
 		<tbody>
 		</tbody>
