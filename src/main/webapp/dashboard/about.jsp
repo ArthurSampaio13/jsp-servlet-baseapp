@@ -6,7 +6,6 @@
 <%
 	if (session.getAttribute("user") != null) {
 %>
-
 <!doctype html>
 <html lang="pt-br" data-bs-theme="dark">
 <head>
