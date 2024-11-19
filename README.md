@@ -81,3 +81,8 @@
 ## 4° Demanda
 - Arthur Lopes Filgueira Sampaio
   1. O usuário pode, na listagem de usuário, procurar por um usuário por parte do nome e utilizar filtros: um para a propriedade de número idade e outro para a propriedade booleana status. Os dados do banco devem vir filtrados por um ou mais endpoints
+
+- Jeová Bezerra Leite
+  1. Atualizado o about com a regra de negócio
+  2.  usuário pode visulizar uma lista de ativiades pelo tempo (timeline) seus e dos outros usuários que cadastraram alguma entidade e curtir a atividade, a atividade na timeline mostra a quantidade de curtidas
+  3. Atualizado o readme com as demandas

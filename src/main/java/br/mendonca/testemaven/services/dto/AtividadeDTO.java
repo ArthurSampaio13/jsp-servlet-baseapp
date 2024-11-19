@@ -1,8 +1,10 @@
 package br.mendonca.testemaven.services.dto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class AtividadeDTO {
+    private UUID id;
     private String tipo;       // Tipo da entidade (Estrela, Galáxia, Planeta)
     private String nome;       // Nome da entidade
     private Integer temperatura;  // Para Estrelas (opcional)
@@ -12,7 +14,16 @@ public class AtividadeDTO {
     private Boolean estaAtivo; // Para todos, exceto Galáxias
     private String descricao; // Descrição customizada
     private int densidade; // Para Planetas
+    private int quantidadeCurtidas;
     private String dateCreated;
+
+    public int getQuantidadeCurtidas() {
+        return quantidadeCurtidas;
+    }
+
+    public void setQuantidadeCurtidas(int quantidadeCurtidas) {
+        this.quantidadeCurtidas = quantidadeCurtidas;
+    }
 
     public String getDateCreated() {
         return dateCreated;
@@ -22,6 +33,14 @@ public class AtividadeDTO {
     }
 
     public AtividadeDTO() {
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getTipo() {
