@@ -89,3 +89,5 @@
 
 - Marcos Pierre de Melo Monteiro
   1. Atualizado o about com a regra de negócio
+  2. O usuario pode, na listagem de usuarios, selecionar um usuário para seguir e através do endpoint 'seguindo' visualizar quem ele segue e deixar de seguir
+  3. Atualizado o readme com as demandas
